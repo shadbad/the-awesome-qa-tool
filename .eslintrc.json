@@ -46,6 +46,10 @@
                 "SwitchCase": 1
             }
         ],
+        "func-names": [
+            "error",
+            "never"
+        ],
         "object-curly-newline": [
             "error",
             {
