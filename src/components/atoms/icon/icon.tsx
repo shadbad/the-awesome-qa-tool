@@ -22,13 +22,9 @@ const Icon = function ({ name, className = '' }: IconPropTypes) {
 
             })
 
-            .catch(() => {
+            .catch((error) => {
 
-                setState({
-                    height: 0,
-                    size: 0,
-                    paths: ['']
-                });
+                throw error;
 
             });
 
@@ -52,7 +48,7 @@ const Icon = function ({ name, className = '' }: IconPropTypes) {
 };
 
 type IconPropTypes = {
-    name: string,
+    name: 'logo' | 'check' | 'check-square' | 'edit' | 'github' | 'linkedin' | 'plus' | 'square' | 'trash' | 'twitter' | 'cross',
     className?: string
 }
 
