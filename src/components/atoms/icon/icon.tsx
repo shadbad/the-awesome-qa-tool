@@ -38,6 +38,7 @@ const Icon = function ({ name, className = '' }: IconPropTypes) {
             height={state.size}
             viewBox={`0 0 ${state.height} ${state.height}`}
             className={`icon ${name} ${className}`}
+            data-testId={`icon-${name}`}
         >
 
             {state.paths.map((p) => <path key={generateId()} className="icon__path" d={p} />)}
