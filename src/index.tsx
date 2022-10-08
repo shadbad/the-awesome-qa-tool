@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Landing, ErrorBoundary } from 'pages';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,19 +9,11 @@ root.render(
 
     <React.StrictMode>
 
-        <Router basename="/the-awesome-qa-tool">
+        <ErrorBoundary>
 
-            <ErrorBoundary>
+            <Landing />
 
-                <Routes>
-
-                    <Route path="/" element={<Landing />} />
-
-                </Routes>
-
-            </ErrorBoundary>
-
-        </Router>
+        </ErrorBoundary>
 
     </React.StrictMode>
 
