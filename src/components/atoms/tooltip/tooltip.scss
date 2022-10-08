@@ -1,0 +1,11 @@
+.tooltip {
+  position: relative;
+}
+
+.tooltip__tip {
+  position: absolute;
+  bottom: -100%;
+  transform: translateY(100%);
+  left: 0;
+  max-width: 20rem;
+}
