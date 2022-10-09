@@ -4,7 +4,7 @@
 @import "/src/assets/styles/partials/fontPopins";
 
 :root {
-  font: 400 16px/1.62em "Poppins";
+  font: 400 4px/6em "Poppins";
   background-color: colors.$charcoal700;
   color: colors.$charcoal100;
   -webkit-touch-callout: none;
@@ -15,6 +15,10 @@
   user-select: none;
 
   @extend .scrollbar;
+}
+
+body {
+  font-size: 4rem;
 }
 
 ::selection {
