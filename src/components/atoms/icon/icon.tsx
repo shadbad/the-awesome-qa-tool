@@ -1,9 +1,10 @@
+import React from 'react';
 import { generateId } from 'utilities';
 import './icon.scss';
 
-const Icon = function ({ name, className = '' }: PropTypes) {
+const IconComponent = function ({ name, className = '' }: PropTypes) {
 
-    const data = Icon.getIconData(name);
+    const data = IconComponent.getIconData(name);
 
     return (
         <svg
@@ -24,15 +25,15 @@ const Icon = function ({ name, className = '' }: PropTypes) {
 };
 
 type PropTypes = {
-    name: 'logo' | 'check' | 'check - square' | 'edit' | 'github' | 'linkedin' | 'plus' | 'square' | 'trash' | 'twitter' | 'cross',
+    name: string,
     className?: string
 }
 
-Icon.defaultProps = {
+IconComponent.defaultProps = {
     className: ''
 };
 
-Icon.data = {
+IconComponent.data = {
     IcoMoonType: 'selection',
     icons: [
         {
@@ -348,16 +349,20 @@ Icon.data = {
     }
 };
 
-Icon.getIconData = (name: string) => {
+IconComponent.getIconData = (name: string) => {
 
-    const item = Icon.data.icons.find((x) => x.properties.name === name);
+    const item = IconComponent.data.icons.find((x) => x.properties.name === name);
+
+    if (!item) return { height: 0, size: 0, paths: [] };
 
     return {
-        height: Icon.data.height,
+        height: IconComponent.data.height,
         size: item?.icon.grid || 0,
         paths: item?.icon.paths || ['']
     };
 
 };
+
+const Icon = React.memo(IconComponent, (p, n) => p.name === n.name);
 
 export { Icon };
