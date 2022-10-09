@@ -1,13 +1,24 @@
-import { Layout } from 'components/organisms';
+import { useState, useLayoutEffect } from 'react';
+import { Layout, Intro } from 'components/organisms';
 import './landing-template.scss';
 
 function LandingTemplate() {
 
+    const INTRO_ANIMATION_DURATION = 6000;
+
+    const [showIntro, setShowIntro] = useState(true);
+
+    useLayoutEffect(() => {
+
+        if (showIntro) setTimeout(() => setShowIntro(false), INTRO_ANIMATION_DURATION);
+
+    }, [showIntro]);
+
     return (
 
-        <Layout>
+        <Layout animate animationDelay={2500}>
 
-            <h1>Landing page</h1>
+            {showIntro && <Intro />}
 
         </Layout>
 

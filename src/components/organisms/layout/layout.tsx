@@ -1,22 +1,35 @@
+import { useLayoutEffect, useState } from 'react';
+import { generateId } from 'utilities';
+import { LinkIcon } from 'components/molecules';
 import 'assets/styles/globals.scss';
 import './layout.scss';
 
-type LayoutPropTypes = {
+function Layout({ animate, animationDelay, children }: PropTypes) {
 
-    children: React.ReactNode
+    const [startAnimation, setStartAnimation] = useState(false);
 
-}
+    useLayoutEffect(() => {
 
-function Layout({ children }: LayoutPropTypes) {
+        if (animate) setTimeout(() => setStartAnimation(true), animationDelay);
+
+    }, [animate, animationDelay]);
+
+    const socialLinks: { [media: string]: string } = {
+
+        linkedin: 'https://www.linkedin.com/in/sina-shadbad/',
+        twitter: 'https://twitter.com/SinaShadbad',
+        github: 'https://github.com/shadbad'
+
+    };
 
     return (
         <>
 
-            <header className="layout__header">
+            <header className={`layout__header ${startAnimation ? 'animate' : ''}`}>
 
                 <div className="layout__header__wrapper">
 
-                    this is the header
+                    <span className="layout__header__wrapper__app-name">The Awesome Q/A Tool</span>
 
                 </div>
 
@@ -32,11 +45,31 @@ function Layout({ children }: LayoutPropTypes) {
 
             </main>
 
-            <footer className="layout__footer">
+            <footer className={`layout__footer ${startAnimation ? 'animate' : ''}`}>
 
                 <div className="layout__footer__wrapper">
 
-                    this is the footer
+                    <small className="layout__footer__wrapper__credit">Developed by Sina Shadbad</small>
+
+                    <ul className="layout__footer__wrapper__social-media">
+
+                        {
+                            Object.entries(socialLinks).map(([key, value]) => (
+
+                                <li key={generateId()} className="layout__footer__wrapper__social-media__item">
+
+                                    <LinkIcon
+                                        className="layout__footer__wrapper__social-media__item__link"
+                                        href={value}
+                                        iconName={key}
+                                    />
+
+                                </li>
+
+                            ))
+                        }
+
+                    </ul>
 
                 </div>
 
@@ -47,5 +80,20 @@ function Layout({ children }: LayoutPropTypes) {
     );
 
 }
+
+type PropTypes = {
+
+    children: React.ReactNode,
+    animate?: boolean,
+    animationDelay?: number
+
+}
+
+Layout.defaultProps = {
+
+    animate: false,
+    animationDelay: 0
+
+};
 
 export { Layout };

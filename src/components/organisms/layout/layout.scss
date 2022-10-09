@@ -1,0 +1,154 @@
+@use "/src/assets/styles/colors.scss";
+@use "/src/assets/styles/shared.scss";
+
+.layout__header__wrapper,
+.layout__footer__wrapper {
+  @extend .wrapper;
+  min-height: 12rem;
+  display: flex;
+  align-items: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 6rem;
+    right: 6rem;
+    height: 0.25rem;
+    bottom: 0;
+    background-color: colors.$charcoal500;
+  }
+}
+
+.layout__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.layout__header__wrapper {
+  &::after {
+    bottom: 0;
+  }
+}
+
+.layout__header__wrapper__app-name {
+  font-weight: 500;
+  color: colors.$charcoal200;
+}
+
+.layout__body {
+  padding: 16rem 0;
+}
+
+.layout__body__wrapper {
+  @extend .wrapper;
+  min-height: calc(100vh - 32rem);
+}
+
+.layout__footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.layout__footer__wrapper {
+  &::after {
+    top: 0;
+  }
+}
+
+.layout__footer__wrapper__credit {
+  margin-right: auto;
+  font-size: 3rem;
+}
+
+.layout__footer__wrapper__social-media {
+  display: flex;
+  gap: 2rem;
+}
+
+.layout__footer__wrapper__social-media__item__link {
+  background-color: colors.$charcoal500;
+  transition: background-color 0.3s ease-in-out;
+
+  svg {
+    path {
+      fill: colors.$charcoal200;
+    }
+  }
+
+  &:hover {
+    background-color: colors.$purple500;
+
+    svg {
+      path {
+        fill: colors.$purple700;
+      }
+    }
+  }
+}
+
+// animation preparation
+
+.layout__header {
+  .layout__header__wrapper {
+    .layout__header__wrapper__app-name {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.3s ease-in-out;
+    }
+
+    &::after {
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out 0.3s;
+    }
+  }
+
+  &.animate {
+    .layout__header__wrapper {
+      .layout__header__wrapper__app-name {
+        clip-path: inset(0 0 0 0);
+      }
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.layout__footer {
+  .layout__footer__wrapper {
+    &::after {
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out 0.3s;
+    }
+
+    .layout__footer__wrapper__credit {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.3s ease-in-out;
+    }
+
+    .layout__footer__wrapper__social-media {
+      clip-path: inset(0 0 0 100%);
+      transition: clip-path 0.3s ease-in-out;
+    }
+  }
+
+  &.animate {
+    .layout__footer__wrapper {
+      &::after {
+        transform: scaleX(1);
+      }
+
+      .layout__footer__wrapper__credit {
+        clip-path: inset(0 0 0 0);
+      }
+
+      .layout__footer__wrapper__social-media {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+  }
+}
