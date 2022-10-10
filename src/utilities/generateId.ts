@@ -1,6 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 
-function generateId() {
+function generateId(): string {
 
     return nanoid();
 
