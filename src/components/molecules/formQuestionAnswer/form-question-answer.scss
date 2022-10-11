@@ -1,0 +1,26 @@
+@use "/src/assets/styles/colors.scss";
+
+.form-question-answer {
+  max-width: 160rem;
+}
+
+.form-question-answer__heading {
+  font-weight: 700;
+  font-size: 5rem;
+  margin-bottom: 4rem;
+  line-height: 1em;
+}
+
+.form-question-answer__question-input {
+  margin-bottom: 4rem;
+}
+
+.form-question-answer__answer-input {
+  margin-bottom: 6rem;
+}
+
+.form-question-answer__buttons-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4rem;
+}
