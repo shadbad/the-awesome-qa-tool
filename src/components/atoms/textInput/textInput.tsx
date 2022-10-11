@@ -18,11 +18,8 @@ const TextInput = function ({ className, label, value, variation, onChange }: Pr
                             id={id}
                             placeholder={label}
                             onChange={onChange as React.ChangeEventHandler<HTMLTextAreaElement>}
-                        >
-
-                            {value}
-
-                        </textarea>
+                            value={value}
+                        />
                     )
 
                     :
