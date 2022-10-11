@@ -1,11 +1,62 @@
+@use "/src/assets/styles/colors.scss";
+
 .tooltip {
   position: relative;
 }
 
+.tooltip__content {
+  display: inline;
+}
+
 .tooltip__tip {
   position: absolute;
-  bottom: -100%;
+  bottom: -2rem;
   transform: translateY(100%);
   left: 0;
-  max-width: 20rem;
+  max-width: 80rem;
+  width: 100%;
+  z-index: 100;
+  background-color: colors.$charcoal600;
+  padding: 4rem;
+  box-sizing: border-box;
+  border: 0.25rem solid colors.$charcoal500;
+  font-size: 3.5rem;
+  line-height: 1.25em;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+
+  &::before {
+    content: "";
+    width: 3rem;
+    height: 3rem;
+    box-sizing: border-box;
+    border: 0.25rem solid colors.$charcoal500;
+    background-color: colors.$charcoal600;
+    position: absolute;
+    top: 0;
+    left: 5%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    transform-origin: top left;
+    transform: rotate(-45deg);
+  }
+}
+
+.tooltip--top {
+  @extend .tooltip;
+
+  .tooltip__tip {
+    bottom: auto;
+    top: -2rem;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

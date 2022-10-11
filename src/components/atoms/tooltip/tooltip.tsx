@@ -11,9 +11,13 @@ function Tooltip({ tip, children }: PropTypes) {
 
     return (
 
-        <div className="tooltip" onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave}>
+        <div className="tooltip">
 
-            {children}
+            <div className="tooltip__content" onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave}>
+
+                {children}
+
+            </div>
 
             {tipVisibility && <span className="tooltip__tip">{tip}</span>}
 
