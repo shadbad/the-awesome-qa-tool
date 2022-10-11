@@ -1,0 +1,58 @@
+@use "/src/assets/styles/colors.scss";
+@use "/src/assets/styles/shared.scss";
+
+.text-input {
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 2rem;
+}
+
+.text-input__input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0 4rem;
+  font-size: 3.5rem;
+  height: 12rem;
+  line-height: 12rem;
+  box-sizing: border-box;
+  background-color: colors.$charcoal700;
+  border: 0.25rem solid colors.$charcoal400;
+}
+
+.text-input__label {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 3.5rem;
+  background-color: colors.$charcoal700;
+  padding: 0 2rem;
+  font-style: italic;
+  color: colors.$charcoal200;
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 0.3s ease-in-out;
+}
+
+.text-input__input:not(:placeholder-shown) + .text-input__label {
+  clip-path: inset(0 0 0 0);
+}
+
+.text-input--multi-line {
+  @extend .text-input;
+
+  .text-input__input {
+    resize: vertical;
+    line-height: 1.5em;
+    padding: 3.125rem 4rem;
+    min-height: 12rem;
+    @extend .scrollbar;
+  }
+
+  .text-input__label {
+  }
+}
