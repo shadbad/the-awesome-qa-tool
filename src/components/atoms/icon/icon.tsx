@@ -2,7 +2,7 @@ import React from 'react';
 import { generateId } from 'utilities';
 import './icon.scss';
 
-const IconComponent = function ({ name, className = '' }: PropTypes) {
+const IconComponent = function ({ name, className }: PropTypes) {
 
     const data = IconComponent.getIconData(name);
 
