@@ -2,6 +2,7 @@
 
 .button-group {
   display: flex;
+  flex-flow: row-reverse;
 }
 
 .button-group__switch {
@@ -30,23 +31,22 @@
 
 .button-group__button-list {
   visibility: hidden;
-  clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 0 0 100%);
   transition: visibility 0s linear 0.3s, clip-path 0.3s ease-in-out;
   display: flex;
+  flex-flow: row-reverse nowrap;
 }
 
 .button-group__button-list__item {
   box-sizing: border-box;
-
   height: 8rem;
-  flex-flow: row nowrap;
 
   button {
     width: 100%;
     box-sizing: border-box;
     height: 8rem;
     width: 8rem;
-    border-left: none;
+    border-right: none;
 
     span {
       display: none;
