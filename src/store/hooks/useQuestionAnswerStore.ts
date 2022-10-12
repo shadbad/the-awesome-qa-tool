@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStateType, questionAnswerActions } from 'store';
-import { QuestionAnswerType, SliceStatus } from 'store/types';
+import { QuestionAnswerType, SliceStatus, QuestionAnswerService } from 'store/types';
 import { generateId } from 'utilities';
 
 function useQuestionAnswerStore() {
@@ -9,7 +9,7 @@ function useQuestionAnswerStore() {
 
     const dispatch = useDispatch();
 
-    return {
+    const questionAnswerService: QuestionAnswerService = {
 
         find(id: string): QuestionAnswerType | undefined {
 
@@ -48,7 +48,7 @@ function useQuestionAnswerStore() {
 
         },
 
-        sort(order: 'date' | 'date desc' | 'question' | 'question desc') {
+        sort(order: 'date' | 'date desc' | 'question' | 'question desc'): void {
 
             dispatch(questionAnswerActions.sort(order));
 
@@ -73,6 +73,8 @@ function useQuestionAnswerStore() {
         sortOrder: data.sortOrder
 
     };
+
+    return questionAnswerService;
 
 }
 
