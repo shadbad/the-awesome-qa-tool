@@ -1,5 +1,4 @@
 import { useLayoutEffect, useState } from 'react';
-import { generateId } from 'utilities';
 import { LinkIcon } from 'components/molecules';
 import 'assets/styles/globals.scss';
 import './layout.scss';
@@ -56,7 +55,7 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
                         {
                             Object.entries(socialLinks).map(([key, value]) => (
 
-                                <li key={generateId()} className="layout__footer__wrapper__social-media__item">
+                                <li key={value} className="layout__footer__wrapper__social-media__item">
 
                                     <LinkIcon
                                         className="layout__footer__wrapper__social-media__item__link"
