@@ -1,0 +1,69 @@
+@use "/src/assets/styles/colors.scss";
+
+.button-group {
+  display: flex;
+}
+
+.button-group__switch {
+  border: 0.25rem solid colors.$charcoal500;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 8rem;
+  height: 8rem;
+  background-color: colors.$charcoal600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: colors.$purple700;
+  }
+}
+
+.button-group__switch__icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.button-group__button-list {
+  visibility: hidden;
+  clip-path: inset(0 100% 0 0);
+  transition: visibility 0s linear 0.3s, clip-path 0.3s ease-in-out;
+  display: flex;
+}
+
+.button-group__button-list__item {
+  box-sizing: border-box;
+
+  height: 8rem;
+  flex-flow: row nowrap;
+
+  button {
+    width: 100%;
+    box-sizing: border-box;
+    height: 8rem;
+    width: 8rem;
+    border-left: none;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      border: none;
+    }
+  }
+}
+
+.button-group--expanded {
+  @extend .button-group;
+
+  .button-group__button-list {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition: visibility 0s linear, clip-path 0.3s ease-in-out;
+  }
+}
