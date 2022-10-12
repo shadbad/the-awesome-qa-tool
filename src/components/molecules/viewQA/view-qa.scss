@@ -1,0 +1,88 @@
+@use "/src/assets/styles/colors.scss";
+
+.view-qa {
+  position: relative;
+  border: 0.25rem solid colors.$charcoal500;
+}
+
+.view-qa__question {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  margin: 0;
+  font-size: 4rem;
+  line-height: 1.62em;
+  cursor: pointer;
+  padding: 4rem;
+  background-color: colors.$charcoal700;
+  box-sizing: border-box;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1rem;
+    background-color: colors.$purple500;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.25rem;
+    background-color: colors.$purple700;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover {
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.view-qa__tools {
+  position: absolute;
+  top: 3.5rem;
+  right: 4rem;
+  z-index: 2;
+}
+
+.view-qa__answer {
+  padding: 0 4rem 0 8rem;
+  box-sizing: border-box;
+  background-color: colors.$charcoal700;
+  overflow: hidden;
+  clip-path: inset(0 0 100% 0);
+  max-height: 0;
+  overflow: hidden;
+  font-style: italic;
+  transition: max-height 0.3s linear, clip-path 0.3s ease-in-out, padding 0.3s linear 0.2s;
+}
+
+.view-qa--expanded {
+  .view-qa__question {
+    &:after {
+      transition: transform 0.3s ease-in-out 0.3s;
+      transform: scaleX(1);
+    }
+  }
+  .view-qa__answer {
+    padding: 4rem;
+    max-height: 100vh;
+    clip-path: inset(0 0 0 0);
+    transition: max-height 0.3s linear, clip-path 0.3s ease-in-out, padding 0.3s linear;
+  }
+}
