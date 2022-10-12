@@ -45,3 +45,9 @@
     }
   }
 }
+
+.button-icon--tooltip {
+  .button-icon__icon {
+    border-right: none;
+  }
+}
