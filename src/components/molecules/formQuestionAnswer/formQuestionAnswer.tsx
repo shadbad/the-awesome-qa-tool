@@ -5,7 +5,7 @@ import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
 import './form-question-answer.scss';
 
-function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit, onCancel }: PropTypes) {
+function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit }: PropTypes) {
 
     if (!questionAnswer) throw new Error('State initialization error.');
 
@@ -89,13 +89,12 @@ function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit, on
                 onChange={handleAnswerChange}
             />
 
-            <div className="form-question-answer__buttons-wrapper">
-
-                <ButtonIcon iconName="check" text="Create Question" onClick={handleSubmit} />
-
-                <ButtonIcon iconName="cross" text="Cancel" onClick={onCancel} />
-
-            </div>
+            <ButtonIcon
+                className="form-question-answer__submit"
+                iconName="check"
+                text="Create Question"
+                onClick={handleSubmit}
+            />
 
         </form>
 
@@ -108,8 +107,7 @@ type PropTypes = {
     className?: string,
     variation?: 'create' | 'update',
     questionAnswer?: QuestionAnswerType,
-    onSubmit?: (questionAnswer: QuestionAnswerType) => void | undefined,
-    onCancel?: () => void | undefined
+    onSubmit?: (questionAnswer: QuestionAnswerType) => void | undefined
 
 };
 
@@ -123,8 +121,7 @@ FormQuestionAnswer.defaultProps = {
         answer: '',
         date: new Date().valueOf()
     },
-    onSubmit: undefined,
-    onCancel: undefined
+    onSubmit: undefined
 
 };
 
