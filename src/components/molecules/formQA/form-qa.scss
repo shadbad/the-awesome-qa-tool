@@ -1,20 +1,20 @@
 @use "/src/assets/styles/colors.scss";
 
-.form-question-answer {
+.form-qa {
   max-width: 160rem;
 }
 
-.form-question-answer__heading {
+.form-qa__heading {
   font-weight: 700;
   font-size: 5rem;
   margin-bottom: 4rem;
   line-height: 1em;
 }
 
-.form-question-answer__question-input {
+.form-qa__question-input {
   margin-bottom: 4rem;
 }
 
-.form-question-answer__answer-input {
+.form-qa__answer-input {
   margin-bottom: 6rem;
 }

@@ -3,9 +3,9 @@ import { TextInput, Tooltip } from 'components/atoms';
 import { ButtonIcon } from 'components/molecules';
 import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
-import './form-question-answer.scss';
+import './form-qa.scss';
 
-function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit }: PropTypes) {
+function FormQA({ className, variation, questionAnswer, onSubmit }: PropTypes) {
 
     if (!questionAnswer) throw new Error('State initialization error.');
 
@@ -65,17 +65,17 @@ function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit }: 
 
     return (
 
-        <form className={`form-question-answer ${className}`}>
+        <form className={`form-qa ${className}`}>
 
             <Tooltip tip={tooltip}>
 
-                <h2 className="form-question-answer__heading">{title}</h2>
+                <h2 className="form-qa__heading">{title}</h2>
 
             </Tooltip>
 
             <TextInput
                 label="Question"
-                className="form-question-answer__question-input"
+                className="form-qa__question-input"
                 variation="single-line"
                 value={state.question}
                 onChange={handleQuestionChange}
@@ -83,14 +83,14 @@ function FormQuestionAnswer({ className, variation, questionAnswer, onSubmit }: 
 
             <TextInput
                 label="Answer"
-                className="form-question-answer__answer-input"
+                className="form-qa__answer-input"
                 variation="multi-line"
                 value={state.answer}
                 onChange={handleAnswerChange}
             />
 
             <ButtonIcon
-                className="form-question-answer__submit"
+                className="form-qa__submit"
                 iconName="check"
                 text="Create Question"
                 onClick={handleSubmit}
@@ -111,7 +111,7 @@ type PropTypes = {
 
 };
 
-FormQuestionAnswer.defaultProps = {
+FormQA.defaultProps = {
 
     className: '',
     variation: 'create',
@@ -130,4 +130,4 @@ type Action<T> = {
     payload: T
 }
 
-export { FormQuestionAnswer };
+export { FormQA };
