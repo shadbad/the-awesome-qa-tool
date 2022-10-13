@@ -1,0 +1,70 @@
+@use "/src/assets/styles/colors.scss";
+@use "/src/assets/styles/shared.scss";
+
+.modal {
+  position: fixed;
+  z-index: 30;
+  top: 16rem;
+  bottom: 16rem;
+  left: 0;
+  width: 100%;
+  clip-path: inset(50% 0 50% 0);
+  animation: slideOut 0.5s ease-in-out forwards;
+}
+
+.modal__wrapper {
+  @extend .wrapper;
+  min-height: 100%;
+  padding: 12rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 6rem;
+    bottom: 0;
+    right: 6rem;
+    background-image: url(../../../assets/images/overlays/05.png);
+  }
+}
+
+.modal__wrapper__close {
+  position: absolute;
+  top: 4rem;
+  right: 10rem;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out 0.5s forwards;
+}
+
+.modal__wrapper__inner-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: colors.$charcoal700;
+  padding: 6rem;
+  box-sizing: border-box;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    clip-path: inset(50% 0 50% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
