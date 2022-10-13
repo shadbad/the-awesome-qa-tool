@@ -24,6 +24,8 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 20;
+  background-color: colors.$charcoal700;
 }
 
 .layout__header__wrapper {
@@ -43,7 +45,7 @@
 
 .layout__body__wrapper {
   @extend .wrapper;
-  min-height: calc(100vh - 32rem);
+  overflow: visible;
 }
 
 .layout__body--inactive {
@@ -56,6 +58,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  z-index: 20;
+  background-color: colors.$charcoal700;
 }
 
 .layout__footer__wrapper {

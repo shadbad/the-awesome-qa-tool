@@ -1,7 +1,7 @@
 import { useQuestionAnswerStore, useAppStore } from 'store/hooks';
 import { Layout, Intro } from 'components/organisms';
 import { ShortLived, ListQA } from 'components/molecules';
-import { QuestionAnswerType } from 'store/types';
+import { QuestionAnswerType, SortOrderType } from 'store/types';
 
 function Landing() {
 
@@ -41,6 +41,12 @@ function Landing() {
 
     };
 
+    const handleSortChange = (sortOrder: string) => {
+
+        qaServices.sort(sortOrder as SortOrderType);
+
+    };
+
     return (
 
         <Layout animate animationDelay={2500}>
@@ -53,10 +59,12 @@ function Landing() {
 
             <ListQA
                 items={qaServices.items}
+                selectedOption={qaServices.sortOrder}
                 onItemCreate={handleItemCreateClick}
                 onItemDelete={handleItemDeleteClick}
                 onItemEdit={handleItemEditClick}
                 onDeleteAll={handleDeleteAllClick}
+                onSortChange={handleSortChange}
             />
 
         </Layout>

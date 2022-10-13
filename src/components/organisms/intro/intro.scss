@@ -1,7 +1,7 @@
 @use "/src/assets/styles/colors.scss";
 
 .intro {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -11,6 +11,7 @@
   box-sizing: border-box;
   text-align: center;
   color: colors.$charcoal200;
+  z-index: 40;
 }
 
 .intro__logo {
