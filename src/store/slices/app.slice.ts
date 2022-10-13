@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ModalActionType, QuestionAnswerType } from 'store/types';
 
 type AppStateType = {
-    modal: 'add' | 'update' | 'delete' | 'none',
+    modal: 'add' | 'update' | 'delete' | 'purge' | 'none',
 
     questionAnswer: QuestionAnswerType | null
 };

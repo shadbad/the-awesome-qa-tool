@@ -1,11 +1,13 @@
 import { useAppStore, useQuestionAnswerStore } from 'store/hooks';
-import { FormQA } from 'components/molecules';
-import './modal.scss';
+import { FormQA, ConfirmBox } from 'components/molecules';
 import { QuestionAnswerType } from 'store/types';
+import { clip } from 'utilities';
+import './modal.scss';
 
 function Modal({ className }: PropTypes) {
 
     const appServices = useAppStore();
+
     const qaServices = useQuestionAnswerStore();
 
     const close = () => {
@@ -24,6 +26,28 @@ function Modal({ className }: PropTypes) {
     const handleUpdateSubmit = (item: QuestionAnswerType) => {
 
         qaServices.update(item);
+        close();
+
+    };
+
+    const handleDeleteConfirm = () => {
+
+        const { qa } = appServices;
+
+        if (qa) {
+
+            qaServices.delete(qa.id);
+
+        }
+
+        close();
+
+    };
+
+    const handlePurgeConfirm = () => {
+
+        qaServices.purge();
+
         close();
 
     };
@@ -59,6 +83,30 @@ function Modal({ className }: PropTypes) {
                                 questionAnswer={appServices.qa}
                                 onSubmit={handleUpdateSubmit}
                                 onCancel={close}
+                            />
+
+                        )
+                    }
+
+                    {
+                        appServices.modal === 'delete' && appServices.qa && (
+
+                            <ConfirmBox
+                                message={`Are you sure you want to delete '${clip(appServices.qa.question, 10)}'?`}
+                                onCancel={close}
+                                onConfirm={handleDeleteConfirm}
+                            />
+
+                        )
+                    }
+
+                    {
+                        appServices.modal === 'purge' && (
+
+                            <ConfirmBox
+                                message="Are you sure you want to delete all questions?"
+                                onCancel={close}
+                                onConfirm={handlePurgeConfirm}
                             />
 
                         )
