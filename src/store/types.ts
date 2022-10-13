@@ -55,3 +55,5 @@ export type QuestionAnswerService = {
     sortOrder: 'date' | 'date desc' | 'question' | 'question desc'
 
 }
+
+export type SortOrderType = 'question' | 'question desc' | 'date' | 'date desc';

@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk, Action } from '@reduxjs/toolkit';
-import { PrimitiveActionType, QuestionAnswerType } from 'store/types';
+import { PrimitiveActionType, QuestionAnswerType, SortOrderType } from 'store/types';
 
 type QuestionAnswerStateType = {
     isLoading: boolean,
     error: string,
     items: QuestionAnswerType[],
-    sortOrder: 'question' | 'question desc' | 'date' | 'date desc'
+    sortOrder: SortOrderType
 };
 
 const fetch = createAsyncThunk('questionAnswer/fetch', () => {
@@ -69,7 +69,7 @@ const questionAnswerSlice = createSlice({
 
         },
 
-        sort: (state, action: PrimitiveActionType<'question' | 'question desc' | 'date' | 'date desc'>) => {
+        sort: (state, action: PrimitiveActionType<SortOrderType>) => {
 
             state.items = [...state.items].sort((a, b) => {
 
@@ -127,14 +127,23 @@ const questionAnswerSlice = createSlice({
 
 const syncListener = {
 
-    predicate: (action: Action) => Object.keys(questionAnswerSlice.actions).map((a) => `questionAnswer/${a}`).includes(action.type),
+    predicate: (action: Action) => Object
+        .keys(questionAnswerSlice.actions)
+        .map((a) => `questionAnswer/${a}`)
+        .includes(action.type),
 
     effect: (action: Action, listenerApi: { getState: any; }) => {
 
         const { getState } = listenerApi;
         const { questionAnswer } = getState();
 
-        window.localStorage.setItem('questionAnswers', JSON.stringify({ items: questionAnswer.items, sortOrder: questionAnswer.sortOrder }));
+        window.localStorage.setItem(
+            'questionAnswers',
+            JSON.stringify({
+                items: questionAnswer.items,
+                sortOrder: questionAnswer.sortOrder
+            })
+        );
 
     }
 };
