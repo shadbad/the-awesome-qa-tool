@@ -14,7 +14,7 @@ function useAppStore() {
 
         },
 
-        data
+        currentModal: data.modal
 
     };
 
