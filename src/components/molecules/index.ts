@@ -6,3 +6,4 @@ export { ButtonGroup } from './buttonGroup/buttonGroup';
 export { ViewQA } from './viewQA/viewQA';
 export { Paginator } from './paginator/paginator';
 export { ListQA } from './listQA/listQA';
+export { ConfirmBox } from './confirmBox/confirmBox';

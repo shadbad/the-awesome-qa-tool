@@ -15,7 +15,7 @@ function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete }: Pr
 
                 <p className="list-qa__sidebar__info">
                     Here you can find
-                    {` ${items.length === 0 ? 'no questions' : items.length} `}
+                    {` ${items.length === 0 ? 'no ' : items.length} `}
                     question
                     {`${items.length === 1 ? '' : 's'}`}
                     . Feel free to create your own questions.
