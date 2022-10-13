@@ -36,7 +36,7 @@ function ViewQA({ className, questionAnswer, onEdit, onDelete }: PropTypes) {
                     iconName="edit"
                     text="Edit"
                     variant="regular"
-                    onClick={() => onEdit(questionAnswer.id)}
+                    onClick={() => onEdit(questionAnswer)}
                 />
 
                 <ButtonIcon
@@ -58,8 +58,8 @@ type PropTypes = {
 
     className?: string,
     questionAnswer: QuestionAnswerType,
-    onEdit: (id: string) => void,
-    onDelete: (id: string) => void
+    onEdit: (item: QuestionAnswerType) => void,
+    onDelete: (itemId: string) => void
 
 }
 
