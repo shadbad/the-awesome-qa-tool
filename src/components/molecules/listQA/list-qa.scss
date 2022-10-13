@@ -1,7 +1,9 @@
 @use "/src/assets/styles/colors.scss";
 
 .list-qa {
+  opacity: 0;
   padding-left: 80rem;
+  animation: fadeIn 0.5s ease-in-out 6s forwards;
 }
 
 .list-qa__sidebar {
@@ -47,10 +49,25 @@
   font-size: 6rem;
 }
 
+.list-qa__list__empty {
+  color: colors.$orange300;
+  font-weight: 500;
+}
+
 .list-qa__list__paginator__item {
   margin-bottom: 4rem;
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
