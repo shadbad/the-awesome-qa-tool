@@ -1,6 +1,6 @@
 import { useQuestionAnswerStore, useAppStore } from 'store/hooks';
-import { Layout, Intro } from 'components/organisms';
-import { ShortLived, ListQA } from 'components/molecules';
+import { Layout, Intro, ShortLived } from 'components/organisms';
+import { ListQA } from 'components/molecules';
 import { QuestionAnswerType, SortOrderType } from 'store/types';
 
 function Landing() {
@@ -15,35 +15,7 @@ function Landing() {
 
         const qa = qaServices.find(id);
 
-        if (qa) {
-
-            appServices.setModal('delete', qa);
-
-        }
-
-    };
-
-    const handleItemEditClick = (item: QuestionAnswerType) => {
-
-        appServices.setModal('update', item);
-
-    };
-
-    const handleItemCreateClick = () => {
-
-        appServices.setModal('add', null);
-
-    };
-
-    const handleDeleteAllClick = () => {
-
-        appServices.setModal('purge', null);
-
-    };
-
-    const handleSortChange = (sortOrder: string) => {
-
-        qaServices.sort(sortOrder as SortOrderType);
+        if (qa) appServices.setModal('delete', qa);
 
     };
 
@@ -60,11 +32,11 @@ function Landing() {
             <ListQA
                 items={qaServices.items}
                 selectedOption={qaServices.sortOrder}
-                onItemCreate={handleItemCreateClick}
+                onItemCreate={() => appServices.setModal('add', null)}
                 onItemDelete={handleItemDeleteClick}
-                onItemEdit={handleItemEditClick}
-                onDeleteAll={handleDeleteAllClick}
-                onSortChange={handleSortChange}
+                onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
+                onDeleteAll={() => appServices.setModal('purge', null)}
+                onSortChange={(sortOrder: string) => qaServices.sort(sortOrder as SortOrderType)}
             />
 
         </Layout>
