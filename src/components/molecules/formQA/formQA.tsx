@@ -106,7 +106,7 @@ type PropTypes = {
 
     className?: string,
     variant?: 'create' | 'update',
-    questionAnswer?: QuestionAnswerType,
+    questionAnswer?: QuestionAnswerType | null,
     onSubmit?: (questionAnswer: QuestionAnswerType) => void | undefined
 
 };
