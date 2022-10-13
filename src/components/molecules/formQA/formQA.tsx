@@ -92,7 +92,7 @@ function FormQA({ className, variant, questionAnswer, onSubmit }: PropTypes) {
             <ButtonIcon
                 className="form-qa__submit"
                 iconName="check"
-                text="Create Question"
+                text={variant === 'create' ? 'Create Question' : 'Update Question'}
                 onClick={handleSubmit}
             />
 
