@@ -9,7 +9,7 @@ export type ModalActionType = {
 
     type: string,
     payload: {
-        modal: 'add' | 'update' | 'delete' | 'none',
+        modal: 'add' | 'update' | 'delete' | 'purge' | 'none',
         questionAnswer: QuestionAnswerType | null
     }
 

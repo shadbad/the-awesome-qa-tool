@@ -3,7 +3,7 @@ import { Tooltip } from 'components/atoms';
 import { ViewQA, Paginator, ButtonIcon } from 'components/molecules';
 import './list-qa.scss';
 
-function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete }: PropTypes) {
+function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete, onDeleteAll }: PropTypes) {
 
     const ITEMS_PER_PAGE = 10;
 
@@ -28,6 +28,13 @@ function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete }: Pr
                         text="Create new question"
                         variant="regular"
                         onClick={() => onItemCreate()}
+                    />
+
+                    <ButtonIcon
+                        iconName="trash"
+                        text="Delete all"
+                        variant="regular"
+                        onClick={() => onDeleteAll()}
                     />
 
                 </div>
@@ -84,7 +91,8 @@ type PropTypes = {
     items: QuestionAnswerType[],
     onItemCreate: () => void,
     onItemEdit: (item: QuestionAnswerType) => void,
-    onItemDelete: (itemId: string) => void
+    onItemDelete: (itemId: string) => void,
+    onDeleteAll: () => void
 }
 
 ListQA.defaultProps = {

@@ -35,6 +35,12 @@ function Landing() {
 
     };
 
+    const handleDeleteAllClick = () => {
+
+        appServices.setModal('purge', null);
+
+    };
+
     return (
 
         <Layout animate animationDelay={2500}>
@@ -50,6 +56,7 @@ function Landing() {
                 onItemCreate={handleItemCreateClick}
                 onItemDelete={handleItemDeleteClick}
                 onItemEdit={handleItemEditClick}
+                onDeleteAll={handleDeleteAllClick}
             />
 
         </Layout>

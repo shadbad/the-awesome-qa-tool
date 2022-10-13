@@ -9,7 +9,7 @@ function useAppStore() {
 
     return {
 
-        setModal(modal: 'add' | 'update' | 'delete' | 'none', questionAnswer: QuestionAnswerType | null) {
+        setModal(modal: 'add' | 'update' | 'delete' | 'purge' | 'none', questionAnswer: QuestionAnswerType | null) {
 
             dispatch(appActions.setModal(
                 {
