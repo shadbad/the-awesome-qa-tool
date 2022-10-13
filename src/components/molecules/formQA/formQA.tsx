@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { TextInput, Tooltip } from 'components/atoms';
+import React, { useReducer, useState } from 'react';
+import { TextInput, Tooltip, Checkbox } from 'components/atoms';
 import { ButtonIcon } from 'components/molecules';
 import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
@@ -13,6 +13,8 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
         'Here you can create new questions and their answers.'
         :
         'Here you can update the selected question and its answer.';
+
+    const [deffer, setDeffer] = useState(false);
 
     const [state, dispatch] = useReducer(
 
@@ -62,7 +64,15 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
     const handleSubmit = () => {
 
-        if (onSubmit) onSubmit(state);
+        if (onSubmit) {
+
+            setTimeout(() => {
+
+                onSubmit(state);
+
+            }, deffer ? 5000 : 0);
+
+        }
 
     };
 
@@ -90,6 +100,14 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
                 variant="multi-line"
                 value={state.answer}
                 onChange={handleAnswerChange}
+            />
+
+            <Checkbox
+                className="form-qa__delay-checkbox"
+                label="Deferred Save"
+                value="false"
+                checked={deffer}
+                onChange={() => setDeffer(!deffer)}
             />
 
             <div className="form-qa__button-wrapper">
