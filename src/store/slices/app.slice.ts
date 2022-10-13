@@ -1,13 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { PrimitiveActionType } from 'store/types';
+import { ModalActionType, QuestionAnswerType } from 'store/types';
 
 type AppStateType = {
-    modal: 'add' | 'update' | 'delete' | 'none'
+    modal: 'add' | 'update' | 'delete' | 'none',
+
+    questionAnswer: QuestionAnswerType | null
 };
 
 const initialState: AppStateType = {
-    modal: 'none'
+    modal: 'none',
+    questionAnswer: null
 };
 
 const appSlice = createSlice({
@@ -18,9 +21,10 @@ const appSlice = createSlice({
 
     reducers: {
 
-        setModal: (state, action: PrimitiveActionType<'add' | 'update' | 'delete' | 'none'>) => {
+        setModal: (state, action: ModalActionType) => {
 
-            state.modal = action.payload;
+            state.modal = action.payload.modal;
+            state.questionAnswer = action.payload.questionAnswer;
 
         }
 

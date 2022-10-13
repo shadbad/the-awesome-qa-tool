@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStateType, questionAnswerActions } from 'store';
 import { QuestionAnswerType, SliceStatus, QuestionAnswerService } from 'store/types';
-import { generateId } from 'utilities';
 
 function useQuestionAnswerStore() {
 
@@ -17,16 +16,9 @@ function useQuestionAnswerStore() {
 
         },
 
-        add(question: string, answer: string): void {
+        add(item: QuestionAnswerType): void {
 
-            const qa: QuestionAnswerType = {
-                id: generateId(),
-                date: new Date().valueOf(),
-                question,
-                answer
-            };
-
-            dispatch(questionAnswerActions.add(qa));
+            dispatch(questionAnswerActions.add(item));
 
         },
 

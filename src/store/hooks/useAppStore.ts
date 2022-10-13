@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStateType, appActions } from 'store';
+import { QuestionAnswerType } from 'store/types';
 
 function useAppStore() {
 
@@ -8,13 +9,20 @@ function useAppStore() {
 
     return {
 
-        setModal(modal: 'add' | 'update' | 'delete' | 'none') {
+        setModal(modal: 'add' | 'update' | 'delete' | 'none', questionAnswer: QuestionAnswerType | null) {
 
-            dispatch(appActions.setModal(modal));
+            dispatch(appActions.setModal(
+                {
+                    modal,
+                    questionAnswer
+                }
+            ));
 
         },
 
-        currentModal: data.modal
+        modal: data.modal,
+
+        qa: data.questionAnswer
 
     };
 

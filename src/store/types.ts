@@ -5,6 +5,16 @@ export interface PrimitiveActionType<T> {
 
 }
 
+export type ModalActionType = {
+
+    type: string,
+    payload: {
+        modal: 'add' | 'update' | 'delete' | 'none',
+        questionAnswer: QuestionAnswerType | null
+    }
+
+}
+
 export type SliceStatus = {
 
     type: 'loading' | 'error' | 'loaded',
@@ -25,7 +35,7 @@ export type QuestionAnswerService = {
 
     find: (id: string) => QuestionAnswerType | undefined,
 
-    add: (question: string, answer: string) => void,
+    add: (item: QuestionAnswerType) => void,
 
     update: (item: QuestionAnswerType) => void,
 
