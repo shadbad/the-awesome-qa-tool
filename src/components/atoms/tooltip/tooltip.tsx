@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './tooltip.scss';
 
-function Tooltip({ tip, children }: PropTypes) {
+function Tooltip({ className, tip, children }: PropTypes) {
 
     const [tipVisibility, setTipVisibility] = useState(false);
 
@@ -11,7 +11,7 @@ function Tooltip({ tip, children }: PropTypes) {
 
     return (
 
-        <div className="tooltip">
+        <div className={`tooltip ${className}`}>
 
             <div className="tooltip__content" onMouseEnter={handleMouseIn} onMouseLeave={handleMouseLeave}>
 
@@ -29,8 +29,15 @@ function Tooltip({ tip, children }: PropTypes) {
 
 type PropTypes = {
 
+    className?: string,
     tip: string,
     children: React.ReactNode
+
+};
+
+Tooltip.defaultProps = {
+
+    className: ''
 
 };
 

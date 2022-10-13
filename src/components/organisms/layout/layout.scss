@@ -46,6 +46,11 @@
   min-height: calc(100vh - 32rem);
 }
 
+.layout__body--inactive {
+  transition: filter 0.3s ease-in-out;
+  filter: blur(3px) grayscale(100%);
+}
+
 .layout__footer {
   position: fixed;
   bottom: 0;
@@ -70,21 +75,20 @@
 }
 
 .layout__footer__wrapper__social-media__item__link {
-  background-color: colors.$charcoal500;
   transition: background-color 0.3s ease-in-out;
 
   svg {
     path {
-      fill: colors.$charcoal200;
+      fill: colors.$charcoal300;
     }
   }
 
   &:hover {
-    background-color: colors.$purple500;
+    background-color: colors.$charcoal500;
 
     svg {
       path {
-        fill: colors.$purple700;
+        fill: colors.$purple300;
       }
     }
   }

@@ -2,7 +2,7 @@
 
 .button-icon {
   border: 0.25rem solid colors.$charcoal500;
-  background-color: colors.$charcoal600;
+  background-color: colors.$charcoal700;
   box-sizing: border-box;
   margin: 0;
   outline: none;
@@ -36,12 +36,10 @@
 }
 
 .button-icon:hover {
-  background-color: colors.$charcoal500;
-
   .button-icon__icon {
-    background-color: colors.$purple500;
+    background-color: colors.$charcoal500;
     path {
-      fill: colors.$charcoal700;
+      fill: colors.$purple200;
     }
   }
 }

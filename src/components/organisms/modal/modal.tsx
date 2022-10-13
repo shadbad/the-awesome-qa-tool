@@ -36,14 +36,6 @@ function Modal({ className }: PropTypes) {
 
             <div className="modal__wrapper">
 
-                <ButtonIcon
-                    className="modal__wrapper__close"
-                    iconName="cross"
-                    text="Close"
-                    variant="tooltip"
-                    onClick={close}
-                />
-
                 <div className="modal__wrapper__inner-wrapper">
 
                     {
@@ -53,6 +45,7 @@ function Modal({ className }: PropTypes) {
                                 variant="create"
                                 questionAnswer={null}
                                 onSubmit={handleCreateSubmit}
+                                onCancel={close}
                             />
 
                         )
@@ -65,6 +58,7 @@ function Modal({ className }: PropTypes) {
                                 variant="update"
                                 questionAnswer={appServices.qa}
                                 onSubmit={handleUpdateSubmit}
+                                onCancel={close}
                             />
 
                         )

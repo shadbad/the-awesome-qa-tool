@@ -9,29 +9,53 @@ function ListQA({ className, items, onItemEdit, onItemDelete }: PropTypes) {
 
         <div className={`list-qa ${className}`}>
 
-            <Tooltip tip="Here you can find created questions and their answers.">
+            <aside className="list-qa__sidebar">
+                <p>
+                    Here you can find
+                    {` ${items.length === 0 ? 'no questions' : items.length} `}
+                    question
+                    {`${items.length === 1 ? '' : 's'}`}
+                    . Feel free to create your own questions.
+                </p>
+            </aside>
 
-                <h2 className="form-qa__heading">Created questions</h2>
+            <div className="list-qa__list">
 
-            </Tooltip>
+                <Tooltip
+                    className="list-qa__list__tooltip"
+                    tip="Here you can find created questions and their answers."
+                >
 
-            <Paginator size={items.length}>
+                    <h2 className="list-qa__list__heading">Created questions</h2>
+
+                </Tooltip>
 
                 {
-                    items.map((item) => (
-
-                        <ViewQA
-                            key={item.id}
-                            questionAnswer={item}
-                            onDelete={onItemDelete}
-                            onEdit={onItemEdit}
-                        />
-
-                    ))
+                    items.length === 0 && <p className="list-qa__list__empty">No questions yet :-(</p>
                 }
 
-            </Paginator>
+                {
+                    items.length > 0 && (
+                        <Paginator className="list-qa__list__paginator" size={items.length}>
 
+                            {
+                                items.map((item) => (
+
+                                    <ViewQA
+                                        key={item.id}
+                                        questionAnswer={item}
+                                        onDelete={onItemDelete}
+                                        onEdit={onItemEdit}
+                                    />
+
+                                ))
+                            }
+
+                        </Paginator>
+                    )
+                }
+
+            </div>
         </div>
 
     );

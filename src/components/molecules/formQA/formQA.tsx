@@ -5,7 +5,7 @@ import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
 import './form-qa.scss';
 
-function FormQA({ className, variant, questionAnswer, onSubmit }: PropTypes) {
+function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
 
     if (!questionAnswer) throw new Error('State initialization error.');
 
@@ -89,12 +89,23 @@ function FormQA({ className, variant, questionAnswer, onSubmit }: PropTypes) {
                 onChange={handleAnswerChange}
             />
 
-            <ButtonIcon
-                className="form-qa__submit"
-                iconName="check"
-                text={variant === 'create' ? 'Create Question' : 'Update Question'}
-                onClick={handleSubmit}
-            />
+            <div className="form-qa__button-wrapper">
+
+                <ButtonIcon
+                    className="form-qa__button-wrapper__submit"
+                    iconName="check"
+                    text={variant === 'create' ? 'Create Question' : 'Update Question'}
+                    onClick={handleSubmit}
+                />
+
+                <ButtonIcon
+                    className="form-qa__button-wrapper__cancel"
+                    iconName="cross"
+                    text="Cancel"
+                    onClick={onCancel}
+                />
+
+            </div>
 
         </form>
 
@@ -107,7 +118,8 @@ type PropTypes = {
     className?: string,
     variant?: 'create' | 'update',
     questionAnswer?: QuestionAnswerType | null,
-    onSubmit?: (questionAnswer: QuestionAnswerType) => void | undefined
+    onSubmit: (questionAnswer: QuestionAnswerType) => void,
+    onCancel: () => void
 
 };
 
@@ -120,8 +132,7 @@ FormQA.defaultProps = {
         question: '',
         answer: '',
         date: new Date().valueOf()
-    },
-    onSubmit: undefined
+    }
 
 };
 

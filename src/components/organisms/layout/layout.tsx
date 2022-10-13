@@ -1,9 +1,13 @@
 import { useLayoutEffect, useState } from 'react';
+import { useAppStore } from 'store/hooks';
 import { LinkIcon } from 'components/molecules';
+import { Modal } from 'components/organisms';
 import 'assets/styles/globals.scss';
 import './layout.scss';
 
 function Layout({ animate, animationDelay, children }: PropTypes) {
+
+    const appServices = useAppStore();
 
     const [startAnimation, setStartAnimation] = useState(false);
 
@@ -34,7 +38,7 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
 
             </header>
 
-            <main className="layout__body">
+            <main className={`layout__body ${appServices.modal !== 'none' ? 'layout__body--inactive' : ''}`}>
 
                 <div className="layout__body__wrapper">
 
@@ -74,6 +78,7 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
 
             </footer>
 
+            <Modal />
         </>
 
     );
