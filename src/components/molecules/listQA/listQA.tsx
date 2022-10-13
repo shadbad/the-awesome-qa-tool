@@ -1,11 +1,19 @@
-import { QuestionAnswerType } from 'store/types';
+import { QuestionAnswerType, SortOrderType } from 'store/types';
 import { Tooltip } from 'components/atoms';
-import { ViewQA, Paginator, ButtonIcon } from 'components/molecules';
+import { ViewQA, Paginator, ButtonIcon, SelectBox } from 'components/molecules';
 import './list-qa.scss';
 
-function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete, onDeleteAll }: PropTypes) {
+function ListQA({ className, items, selectedOption, onItemCreate, onItemEdit,
+    onItemDelete, onDeleteAll, onSortChange }: PropTypes) {
 
     const ITEMS_PER_PAGE = 10;
+
+    const sortOptions: { key: SortOrderType, title: string }[] = [
+        { key: 'question', title: 'Alphabetically, A-Z' },
+        { key: 'question desc', title: 'Alphabetically, Z-A' },
+        { key: 'date', title: 'Date, old to new' },
+        { key: 'date desc', title: 'Date, new to old' }
+    ];
 
     return (
 
@@ -35,6 +43,13 @@ function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete, onDe
                         text="Delete all"
                         variant="regular"
                         onClick={() => onDeleteAll()}
+                    />
+
+                    <SelectBox
+                        title="Sort by"
+                        options={sortOptions}
+                        selectedOption={selectedOption}
+                        onSelect={onSortChange}
                     />
 
                 </div>
@@ -79,6 +94,7 @@ function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete, onDe
                 }
 
             </div>
+
         </div>
 
     );
@@ -89,10 +105,12 @@ type PropTypes = {
 
     className?: string,
     items: QuestionAnswerType[],
+    selectedOption: string,
     onItemCreate: () => void,
     onItemEdit: (item: QuestionAnswerType) => void,
     onItemDelete: (itemId: string) => void,
-    onDeleteAll: () => void
+    onDeleteAll: () => void,
+    onSortChange: (sortOrder: string) => void
 }
 
 ListQA.defaultProps = {

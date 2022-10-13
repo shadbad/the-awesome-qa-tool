@@ -2,28 +2,30 @@
 
 .list-qa {
   opacity: 0;
-  padding-left: 80rem;
   animation: fadeIn 0.5s ease-in-out 6s forwards;
+  display: flex;
+  gap: 6rem;
+  overflow: visible;
 }
 
 .list-qa__sidebar {
-  position: absolute;
-  top: 0;
-  left: 6rem;
-  bottom: 0;
+  position: sticky;
+  top: 16rem;
   width: 80rem;
   box-sizing: border-box;
-  padding-right: 12rem;
+  padding-right: 6rem;
   color: colors.$charcoal200;
-
   line-height: 1.5em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: calc(100vh - 32rem);
 
   &::after {
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 6rem;
+    right: 0;
     width: 0.25rem;
     background: linear-gradient(to bottom, transparent, rgba(colors.$charcoal500, 1), transparent);
   }
@@ -38,6 +40,10 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 2rem;
+}
+
+.list-qa__list {
+  flex-grow: 1;
 }
 
 .list-qa__list__tooltip {
