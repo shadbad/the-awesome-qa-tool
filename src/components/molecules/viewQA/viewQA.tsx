@@ -35,14 +35,14 @@ function ViewQA({ className, questionAnswer, onEdit, onDelete }: PropTypes) {
                 <ButtonIcon
                     iconName="edit"
                     text="Edit"
-                    variation="regular"
+                    variant="regular"
                     onClick={() => onEdit(questionAnswer.id)}
                 />
 
                 <ButtonIcon
                     iconName="trash"
                     text="Delete"
-                    variation="regular"
+                    variant="regular"
                     onClick={() => onDelete(questionAnswer.id)}
                 />
 

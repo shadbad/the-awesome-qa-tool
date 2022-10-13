@@ -18,7 +18,7 @@ function ButtonGroup({ className, title, children }: PropTypes) {
         <div className={`button-group${isExpanded ? '--expanded' : ''} ${className}`}>
 
             <ButtonIcon
-                variation="tooltip"
+                variant="tooltip"
                 iconName={isExpanded ? 'cross' : 'more-vertical'}
                 className="button-group__switch"
                 text={title}

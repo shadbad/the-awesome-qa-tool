@@ -5,13 +5,13 @@ import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
 import './form-qa.scss';
 
-function FormQA({ className, variation, questionAnswer, onSubmit }: PropTypes) {
+function FormQA({ className, variant, questionAnswer, onSubmit }: PropTypes) {
 
     if (!questionAnswer) throw new Error('State initialization error.');
 
-    const title = variation === 'create' ? 'Create a new question' : 'Update the selected question';
+    const title = variant === 'create' ? 'Create a new question' : 'Update the selected question';
 
-    const tooltip = variation === 'create' ?
+    const tooltip = variant === 'create' ?
         'Here you can create new questions and their answers.'
         :
         'Here you can update the selected question and its answer.';
@@ -76,7 +76,7 @@ function FormQA({ className, variation, questionAnswer, onSubmit }: PropTypes) {
             <TextInput
                 label="Question"
                 className="form-qa__question-input"
-                variation="single-line"
+                variant="single-line"
                 value={state.question}
                 onChange={handleQuestionChange}
             />
@@ -84,7 +84,7 @@ function FormQA({ className, variation, questionAnswer, onSubmit }: PropTypes) {
             <TextInput
                 label="Answer"
                 className="form-qa__answer-input"
-                variation="multi-line"
+                variant="multi-line"
                 value={state.answer}
                 onChange={handleAnswerChange}
             />
@@ -105,7 +105,7 @@ function FormQA({ className, variation, questionAnswer, onSubmit }: PropTypes) {
 type PropTypes = {
 
     className?: string,
-    variation?: 'create' | 'update',
+    variant?: 'create' | 'update',
     questionAnswer?: QuestionAnswerType,
     onSubmit?: (questionAnswer: QuestionAnswerType) => void | undefined
 
@@ -114,7 +114,7 @@ type PropTypes = {
 FormQA.defaultProps = {
 
     className: '',
-    variation: 'create',
+    variant: 'create',
     questionAnswer: {
         id: generateId(),
         question: '',

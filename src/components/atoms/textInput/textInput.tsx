@@ -1,16 +1,16 @@
 import React from 'react';
 import './text-input.scss';
 
-const TextInput = function ({ className, label, value, variation, onChange }: PropTypes) {
+const TextInput = function ({ className, label, value, variant, onChange }: PropTypes) {
 
     const id = label.toLocaleLowerCase().replace(' ', '_');
 
     return (
 
-        <div className={`text-input${variation === 'multi-line' ? '--multi-line' : ''} ${className}`} title={label}>
+        <div className={`text-input${variant === 'multi-line' ? '--multi-line' : ''} ${className}`} title={label}>
 
             {
-                variation === 'multi-line' ?
+                variant === 'multi-line' ?
 
                     (
                         <textarea
@@ -47,7 +47,7 @@ const TextInput = function ({ className, label, value, variation, onChange }: Pr
 type PropTypes = {
     className?: string,
     label: string,
-    variation?: 'single-line' | 'multi-line',
+    variant?: 'single-line' | 'multi-line',
     value?: string,
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     | React.ChangeEventHandler<HTMLTextAreaElement>
@@ -58,7 +58,7 @@ TextInput.defaultProps = {
 
     className: '',
     value: '',
-    variation: 'single-line',
+    variant: 'single-line',
     onChange: undefined
 
 };
