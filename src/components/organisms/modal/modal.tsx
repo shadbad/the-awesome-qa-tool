@@ -1,5 +1,5 @@
 import { useAppStore, useQuestionAnswerStore } from 'store/hooks';
-import { ButtonIcon, FormQA } from 'components/molecules';
+import { FormQA } from 'components/molecules';
 import './modal.scss';
 import { QuestionAnswerType } from 'store/types';
 

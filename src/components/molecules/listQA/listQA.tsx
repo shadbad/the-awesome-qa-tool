@@ -1,22 +1,37 @@
 import { QuestionAnswerType } from 'store/types';
 import { Tooltip } from 'components/atoms';
-import { ViewQA, Paginator } from 'components/molecules';
+import { ViewQA, Paginator, ButtonIcon } from 'components/molecules';
 import './list-qa.scss';
 
-function ListQA({ className, items, onItemEdit, onItemDelete }: PropTypes) {
+function ListQA({ className, items, onItemCreate, onItemEdit, onItemDelete }: PropTypes) {
+
+    const ITEMS_PER_PAGE = 10;
 
     return (
 
         <div className={`list-qa ${className}`}>
 
             <aside className="list-qa__sidebar">
-                <p>
+
+                <p className="list-qa__sidebar__info">
                     Here you can find
                     {` ${items.length === 0 ? 'no questions' : items.length} `}
                     question
                     {`${items.length === 1 ? '' : 's'}`}
                     . Feel free to create your own questions.
                 </p>
+
+                <div className="list-qa__sidebar__tools">
+
+                    <ButtonIcon
+                        iconName="plus"
+                        text="Create new question"
+                        variant="regular"
+                        onClick={() => onItemCreate()}
+                    />
+
+                </div>
+
             </aside>
 
             <div className="list-qa__list">
@@ -36,12 +51,13 @@ function ListQA({ className, items, onItemEdit, onItemDelete }: PropTypes) {
 
                 {
                     items.length > 0 && (
-                        <Paginator className="list-qa__list__paginator" size={items.length}>
+                        <Paginator className="list-qa__list__paginator" size={ITEMS_PER_PAGE}>
 
                             {
                                 items.map((item) => (
 
                                     <ViewQA
+                                        className="list-qa__list__paginator__item"
                                         key={item.id}
                                         questionAnswer={item}
                                         onDelete={onItemDelete}
@@ -66,6 +82,7 @@ type PropTypes = {
 
     className?: string,
     items: QuestionAnswerType[],
+    onItemCreate: () => void,
     onItemEdit: (item: QuestionAnswerType) => void,
     onItemDelete: (itemId: string) => void
 }

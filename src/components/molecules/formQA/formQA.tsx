@@ -7,8 +7,6 @@ import './form-qa.scss';
 
 function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
 
-    if (!questionAnswer) throw new Error('State initialization error.');
-
     const title = variant === 'create' ? 'Create a new question' : 'Update the selected question';
 
     const tooltip = variant === 'create' ?
@@ -35,7 +33,12 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
         },
 
-        questionAnswer
+        questionAnswer || {
+            id: generateId(),
+            question: '',
+            answer: '',
+            date: new Date().valueOf()
+        }
 
     );
 

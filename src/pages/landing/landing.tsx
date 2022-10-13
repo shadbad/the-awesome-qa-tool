@@ -29,6 +29,12 @@ function Landing() {
 
     };
 
+    const handleItemCreateClick = () => {
+
+        appServices.setModal('add', null);
+
+    };
+
     return (
 
         <Layout animate animationDelay={2500}>
@@ -39,7 +45,12 @@ function Landing() {
 
             </ShortLived>
 
-            <ListQA items={qaServices.items} onItemDelete={handleItemDeleteClick} onItemEdit={handleItemEditClick} />
+            <ListQA
+                items={qaServices.items}
+                onItemCreate={handleItemCreateClick}
+                onItemDelete={handleItemDeleteClick}
+                onItemEdit={handleItemEditClick}
+            />
 
         </Layout>
 
