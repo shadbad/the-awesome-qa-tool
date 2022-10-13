@@ -64,10 +64,8 @@
   padding: 0 4rem 0 8rem;
   box-sizing: border-box;
   background-color: colors.$charcoal700;
-  overflow: hidden;
   clip-path: inset(0 0 100% 0);
   max-height: 0;
-  overflow: hidden;
   font-style: italic;
   transition: max-height 0.3s linear, clip-path 0.3s ease-in-out, padding 0.3s linear 0.2s;
 }
