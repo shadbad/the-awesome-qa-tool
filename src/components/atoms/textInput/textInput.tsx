@@ -1,13 +1,20 @@
 import React from 'react';
 import './text-input.scss';
 
-const TextInput = function ({ className, label, value, variant, onChange }: PropTypes) {
+const TextInput = function ({ className, label, value, errorMessage, variant, onChange }: PropTypes) {
 
     const id = label.toLocaleLowerCase().replace(' ', '_');
 
     return (
 
-        <div className={`text-input${variant === 'multi-line' ? '--multi-line' : ''} ${className}`} title={label}>
+        <div
+            className={
+                `text-input${variant === 'multi-line' ? '--multi-line' : ''} 
+                ${errorMessage !== '' ? 'text-input--error' : ''}
+                ${className}`
+            }
+            title={label}
+        >
 
             {
                 variant === 'multi-line' ?
@@ -38,6 +45,8 @@ const TextInput = function ({ className, label, value, variant, onChange }: Prop
 
             <label className="text-input__label" htmlFor={id}>{label}</label>
 
+            <span className="text-input__error-message">{errorMessage}</span>
+
         </div>
 
     );
@@ -49,6 +58,7 @@ type PropTypes = {
     label: string,
     variant?: 'single-line' | 'multi-line',
     value?: string,
+    errorMessage?: string,
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     | React.ChangeEventHandler<HTMLTextAreaElement>
     | undefined
@@ -59,6 +69,7 @@ TextInput.defaultProps = {
     className: '',
     value: '',
     variant: 'single-line',
+    errorMessage: '',
     onChange: undefined
 
 };

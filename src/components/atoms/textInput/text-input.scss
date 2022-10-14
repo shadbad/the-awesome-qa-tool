@@ -5,6 +5,7 @@
   position: relative;
   box-sizing: border-box;
   padding-top: 2rem;
+  overflow: hidden;
 }
 
 .text-input__input {
@@ -38,6 +39,19 @@
   transition: clip-path 0.3s ease-in-out;
 }
 
+.text-input__error-message {
+  line-height: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+  display: block;
+  text-align: right;
+  font-style: italic;
+  color: colors.$orange200;
+  float: right;
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 0.3s ease-in-out;
+}
+
 .text-input__input:not(:placeholder-shown) + .text-input__label {
   clip-path: inset(0 0 0 0);
 }
@@ -54,5 +68,11 @@
   }
 
   .text-input__label {
+  }
+}
+
+.text-input--error {
+  .text-input__error-message {
+    clip-path: inset(0 0 0 0);
   }
 }
