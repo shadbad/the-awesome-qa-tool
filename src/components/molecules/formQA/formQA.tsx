@@ -1,4 +1,6 @@
-import React, { useReducer, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useReducer } from 'react';
+import { produce } from 'immer';
 import { TextInput, Tooltip, Checkbox } from 'components/atoms';
 import { ButtonIcon } from 'components/molecules';
 import { QuestionAnswerType } from 'store/types';
@@ -7,26 +9,61 @@ import './form-qa.scss';
 
 function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
 
-    const title = variant === 'create' ? 'Create a new question' : 'Update the selected question';
+    const initialState: StateType = {
 
-    const tooltip = variant === 'create' ?
-        'Here you can create new questions and their answers.'
-        :
-        'Here you can update the selected question and its answer.';
-
-    const [deffer, setDeffer] = useState(false);
+        questionAnswer: questionAnswer || {
+            id: generateId(),
+            question: '',
+            answer: '',
+            date: new Date().valueOf()
+        },
+        validationSummary: {
+            questionError: '',
+            answerError: ''
+        },
+        defferSave: false
+    };
 
     const [state, dispatch] = useReducer(
 
-        (_state: QuestionAnswerType, action: Action<string>) => {
+        (_state: StateType, action: ActionType) => {
 
             switch (action.type) {
 
                 case 'setQuestion':
-                    return { ..._state, question: action.payload };
+                    return produce(_state, (draft) => {
+
+                        draft.questionAnswer.question = action.payload as string;
+
+                    });
 
                 case 'setAnswer':
-                    return { ..._state, answer: action.payload };
+                    return produce(_state, (draft) => {
+
+                        draft.questionAnswer.answer = action.payload as string;
+
+                    });
+
+                case 'setDeffer':
+                    return produce(_state, (draft) => {
+
+                        draft.defferSave = action.payload as boolean;
+
+                    });
+
+                case 'setQuestionValidation':
+                    return produce(_state, (draft) => {
+
+                        draft.validationSummary.questionError = action.payload as string;
+
+                    });
+
+                case 'setAnswerValidation':
+                    return produce(_state, (draft) => {
+
+                        draft.validationSummary.answerError = action.payload as string;
+
+                    });
 
                 default:
                     throw new Error('unknown command');
@@ -35,46 +72,68 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
         },
 
-        questionAnswer || {
-            id: generateId(),
-            question: '',
-            answer: '',
-            date: new Date().valueOf()
-        }
+        initialState
 
     );
 
+    const validate = (): boolean => {
+
+        let result = true;
+
+        if (state.questionAnswer.question.trim().length === 0) {
+
+            result = false;
+            dispatch({ type: 'setQuestionValidation', payload: 'This field is required.' });
+
+        } else dispatch({ type: 'setQuestionValidation', payload: '' });
+
+        if (state.questionAnswer.answer.trim().length === 0) {
+
+            result = false;
+            dispatch({ type: 'setAnswerValidation', payload: 'This field is required.' });
+
+        } else dispatch({ type: 'setAnswerValidation', payload: '' });
+
+        return result;
+
+    };
+
     const handleQuestionChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
 
-        dispatch({
-            type: 'setQuestion',
-            payload: target.value
-        });
+        dispatch({ type: 'setQuestion', payload: target.value });
 
     };
 
     const handleAnswerChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => {
 
-        dispatch({
-            type: 'setAnswer',
-            payload: target.value
-        });
+        dispatch({ type: 'setAnswer', payload: target.value });
+
+    };
+
+    const handelDefferChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+
+        dispatch({ type: 'setDeffer', payload: target.checked });
 
     };
 
     const handleSubmit = () => {
 
-        if (onSubmit) {
+        if (onSubmit && validate()) {
 
             setTimeout(() => {
 
-                onSubmit(state);
+                onSubmit(state.questionAnswer);
 
-            }, deffer ? 5000 : 0);
+            }, state.defferSave ? 5000 : 0);
 
         }
 
     };
+
+    const tooltip = variant === 'create' ?
+        'Here you can create new questions and their answers.'
+        :
+        'Here you can update the selected question and its answer.';
 
     return (
 
@@ -82,7 +141,9 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
             <Tooltip tip={tooltip}>
 
-                <h2 className="form-qa__heading">{title}</h2>
+                <h2 className="form-qa__heading">
+                    {variant === 'create' ? 'Create a new question' : 'Update the selected question'}
+                </h2>
 
             </Tooltip>
 
@@ -90,24 +151,25 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
                 label="Question"
                 className="form-qa__question-input"
                 variant="single-line"
-                value={state.question}
+                value={state.questionAnswer.question}
                 onChange={handleQuestionChange}
+                errorMessage={state.validationSummary.questionError}
             />
 
             <TextInput
                 label="Answer"
                 className="form-qa__answer-input"
                 variant="multi-line"
-                value={state.answer}
+                value={state.questionAnswer.answer}
                 onChange={handleAnswerChange}
+                errorMessage={state.validationSummary.answerError}
             />
 
             <Checkbox
                 className="form-qa__delay-checkbox"
                 label="Deferred Save"
-                value="false"
-                checked={deffer}
-                onChange={() => setDeffer(!deffer)}
+                checked={state.defferSave}
+                onChange={handelDefferChange}
             />
 
             <div className="form-qa__button-wrapper">
@@ -157,9 +219,18 @@ FormQA.defaultProps = {
 
 };
 
-type Action<T> = {
+type ActionType = {
     type: string,
-    payload: T
+    payload: string | boolean
+}
+
+type StateType = {
+
+    questionAnswer: QuestionAnswerType,
+
+    validationSummary: { [key: string]: string },
+
+    defferSave: boolean
 }
 
 export { FormQA };
