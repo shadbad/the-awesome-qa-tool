@@ -1,7 +1,7 @@
 import { Icon } from 'components/atoms';
 import './checkbox.scss';
 
-function Checkbox({ className, label, checked, value, onChange }: PropTypes) {
+function Checkbox({ className, label, checked, onChange }: PropTypes) {
 
     const id = label.toLocaleLowerCase().replace(' ', '_');
 
@@ -16,7 +16,6 @@ function Checkbox({ className, label, checked, value, onChange }: PropTypes) {
                 type="checkbox"
                 checked={checked}
                 onChange={onChange}
-                value={value}
             />
 
             <label className="checkbox__label" htmlFor={id}>{label}</label>
@@ -30,7 +29,6 @@ type PropTypes = {
     className?: string,
     checked?: boolean,
     label: string,
-    value: string,
     onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
