@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { produce } from 'immer';
 import { TextInput, Tooltip, Checkbox } from 'components/atoms';
 import { ButtonIcon } from 'components/molecules';
@@ -21,7 +21,9 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
             questionError: '',
             answerError: ''
         },
-        defferSave: false
+        defferSave: false,
+        startCountDown: false,
+        counter: 5
     };
 
     const [state, dispatch] = useReducer(
@@ -65,6 +67,20 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
                     });
 
+                case 'setStartCountDown':
+                    return produce(_state, (draft) => {
+
+                        draft.startCountDown = action.payload as boolean;
+
+                    });
+
+                case 'setCounter':
+                    return produce(_state, (draft) => {
+
+                        draft.counter = action.payload as number;
+
+                    });
+
                 default:
                     throw new Error('unknown command');
 
@@ -75,6 +91,31 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
         initialState
 
     );
+
+    useEffect(() => {
+
+        let intervalId: NodeJS.Timer;
+
+        if (state.startCountDown) {
+
+            intervalId = setInterval(() => {
+
+                if (state.counter === 0) {
+
+                    onSubmit(state.questionAnswer);
+                    clearInterval(intervalId);
+
+                }
+
+                dispatch({ type: 'setCounter', payload: state.counter - 1 });
+
+            }, 1000);
+
+        }
+
+        return () => clearInterval(intervalId);
+
+    }, [state.startCountDown, state.counter]);
 
     const validate = (): boolean => {
 
@@ -120,11 +161,15 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
         if (onSubmit && validate()) {
 
-            setTimeout(() => {
+            if (!state.defferSave) onSubmit(state.questionAnswer);
 
-                onSubmit(state.questionAnswer);
+            else dispatch({ type: 'setStartCountDown', payload: true });
 
-            }, state.defferSave ? 5000 : 0);
+            // setTimeout(() => {
+
+            //     onSubmit(state.questionAnswer);
+
+            // }, state.defferSave ? 5000 : 0);
 
         }
 
@@ -137,7 +182,7 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
     return (
 
-        <form className={`form-qa ${className}`}>
+        <form className={`form-qa ${className} ${state.startCountDown ? 'form-qa--count-down' : ''}`} data-counter={state.counter}>
 
             <Tooltip tip={tooltip}>
 
@@ -221,7 +266,7 @@ FormQA.defaultProps = {
 
 type ActionType = {
     type: string,
-    payload: string | boolean
+    payload: string | boolean | number
 }
 
 type StateType = {
@@ -230,7 +275,11 @@ type StateType = {
 
     validationSummary: { [key: string]: string },
 
-    defferSave: boolean
+    defferSave: boolean,
+
+    startCountDown: boolean,
+
+    counter: number
 }
 
 export { FormQA };

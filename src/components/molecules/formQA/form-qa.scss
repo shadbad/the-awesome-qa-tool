@@ -27,3 +27,31 @@
   display: flex;
   gap: 6rem;
 }
+
+.form-qa--count-down {
+  position: relative;
+
+  &::before {
+    content: attr(data-counter);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30rem;
+    z-index: 2;
+    font-weight: 700;
+    color: colors.$charcoal700;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -6rem;
+    left: -6rem;
+    bottom: -6rem;
+    right: -6rem;
+    background-color: rgba(colors.$charcoal400, 0.5);
+    background-image: url(../../../assets/images/overlays/05.png);
+    z-index: 1;
+  }
+}
