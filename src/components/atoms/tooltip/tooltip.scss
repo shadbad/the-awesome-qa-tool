@@ -2,19 +2,17 @@
 
 .tooltip {
   position: relative;
+  overflow: hidden;
 }
 
 .tooltip__content {
   display: inline;
+  float: left;
 }
 
 .tooltip__tip {
-  position: absolute;
-  bottom: -2rem;
-  transform: translateY(100%);
-  left: 0;
-  max-width: 80rem;
-  width: 100%;
+  position: fixed;
+  width: 80rem;
   z-index: 100;
   background-color: colors.$charcoal600;
   padding: 4rem;
@@ -23,22 +21,25 @@
   font-size: 3.5rem;
   line-height: 1.25em;
   opacity: 0;
-  animation: fadeIn 0.3s ease-in-out forwards;
-
-  &::before {
-    content: "";
-    width: 3rem;
-    height: 3rem;
-    box-sizing: border-box;
-    border: 0.25rem solid colors.$charcoal500;
-    background-color: colors.$charcoal600;
-    position: absolute;
-    top: 0;
-    left: 5%;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    transform-origin: top left;
-    transform: rotate(-45deg);
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
+  &.visible {
+    transition: visibility 0s linear, opacity 0.3s ease-in-out;
+    opacity: 1;
+    visibility: visible;
   }
+}
+
+.tooltip__tip__triangle {
+  width: 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+  border: 0.25rem solid colors.$charcoal500;
+  background-color: colors.$charcoal600;
+  position: fixed;
+  z-index: 101;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  transform-origin: top left;
 }
 
 .tooltip--top {
