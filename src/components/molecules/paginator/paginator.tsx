@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { ButtonIcon } from 'components/molecules';
 import './paginator.scss';
@@ -8,6 +8,12 @@ const Paginator = function ({ className, size, children }: PropTypes) {
     const totalPages = children.length <= size ? 1 : Math.ceil(children.length / size);
 
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+
+        setCurrentPage(1);
+
+    }, [totalPages]);
 
     const handelNextButtonClick = () => {
 
