@@ -15,8 +15,6 @@ function Tooltip({ className, tip, children }: PropTypes) {
 
         if (!toolTipElement || !toolTipTriangleElement) return;
 
-        const toolTipRects: DOMRect = toolTipElement.getClientRects()[0];
-
         const toolTipStyles = window.getComputedStyle(toolTipElement);
 
         const PADDING = 24;
@@ -29,11 +27,6 @@ function Tooltip({ className, tip, children }: PropTypes) {
         const height = parseInt(toolTipStyles.height, 10);
         let left = parseInt(toolTipStyles.left, 10);
         let top = parseInt(toolTipStyles.top, 10);
-
-        console.log(clientX, clientY);
-
-        console.log('rl', toolTipRects.left, 'rt', toolTipRects.top);
-        console.log('l', left, 't', top, 'w', width, 'h', height);
 
         // fits below?
         if (height + PADDING < innerHeight - clientY) {
