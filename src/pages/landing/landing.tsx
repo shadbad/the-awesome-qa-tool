@@ -19,6 +19,20 @@ function Landing() {
 
     };
 
+    if (process.env.NODE_ENV === 'test') {
+
+        return (
+
+            <ListQA
+                items={qaServices.items}
+                onItemDelete={handleItemDeleteClick}
+                onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
+            />
+
+        );
+
+    }
+
     return (
 
         <Layout animate animationDelay={2500}>
