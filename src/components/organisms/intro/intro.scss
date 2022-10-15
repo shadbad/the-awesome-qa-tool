@@ -11,7 +11,7 @@
   box-sizing: border-box;
   text-align: center;
   color: colors.$charcoal200;
-  z-index: 40;
+  z-index: 18;
 }
 
 .intro__logo {
@@ -23,6 +23,12 @@
     stroke-width: 1rem;
     fill: transparent;
   }
+
+  @media (max-width: 500px) {
+    width: 50rem;
+    height: 50rem;
+    margin-bottom: 4rem;
+  }
 }
 
 .intro__heading {
@@ -30,12 +36,22 @@
   line-height: 1em;
   font-weight: 700;
   margin-bottom: 4rem;
+
+  @media (max-width: 500px) {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .intro__description {
   font-size: 4rem;
   letter-spacing: 1rem;
   word-spacing: 2rem;
+
+  @media (max-width: 500px) {
+    font-size: 3rem;
+    word-spacing: 1rem;
+  }
 }
 
 // animation preparation
@@ -60,7 +76,7 @@
   }
 
   &.animate {
-    opacity: 0;
+    opacity: 1;
 
     .intro__logo {
       path {
