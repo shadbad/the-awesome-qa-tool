@@ -29,18 +29,22 @@
 }
 
 .layout__header__wrapper {
+  display: flex;
+  align-items: center;
+
   &::after {
     bottom: 0;
   }
 }
 
 .layout__header__wrapper__app-name {
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1em;
   color: colors.$charcoal200;
 }
 
 .layout__header__wrapper__menu-button {
-  margin-right: 4rem;
+  margin-right: 2rem;
 }
 
 .layout__body {
@@ -131,6 +135,10 @@
 
   @media (max-width: 1200px) {
     left: 6rem;
+  }
+
+  @media (max-width: 344px) {
+    width: calc(100% - 18rem);
   }
 }
 

@@ -39,6 +39,7 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
     const handleMenuButtonClick = useCallback(() => {
 
         appServices.toggleMenu();
+        appServices.setModal('none', null);
 
     }, []);
 
