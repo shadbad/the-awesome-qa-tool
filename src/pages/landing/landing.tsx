@@ -1,7 +1,7 @@
 import { useQuestionAnswerStore, useAppStore } from 'store/hooks';
 import { Layout, Intro, ShortLived, DelayRender } from 'components/organisms';
 import { ListQA } from 'components/molecules';
-import { QuestionAnswerType, SortOrderType } from 'store/types';
+import { QuestionAnswerType } from 'store/types';
 
 function Landing() {
 
@@ -33,12 +33,8 @@ function Landing() {
 
                 <ListQA
                     items={qaServices.items}
-                    selectedOption={qaServices.sortOrder}
-                    onItemCreate={() => appServices.setModal('add', null)}
                     onItemDelete={handleItemDeleteClick}
                     onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
-                    onDeleteAll={() => appServices.setModal('purge', null)}
-                    onSortChange={(sortOrder: string) => qaServices.sort(sortOrder as SortOrderType)}
                 />
 
             </DelayRender>

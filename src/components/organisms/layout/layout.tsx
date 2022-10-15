@@ -1,6 +1,8 @@
-import { useLayoutEffect, useState } from 'react';
-import { useAppStore } from 'store/hooks';
-import { LinkIcon } from 'components/molecules';
+import { useLayoutEffect, useState, useCallback } from 'react';
+import { useAppStore, useQuestionAnswerStore } from 'store/hooks';
+import { SortOrderType } from 'store/types';
+import { ButtonMenu } from 'components/atoms';
+import { LinkIcon, ButtonIcon, SelectBox } from 'components/molecules';
 import { Modal } from 'components/organisms';
 import 'assets/styles/globals.scss';
 import './layout.scss';
@@ -8,6 +10,8 @@ import './layout.scss';
 function Layout({ animate, animationDelay, children }: PropTypes) {
 
     const appServices = useAppStore();
+
+    const qaServices = useQuestionAnswerStore();
 
     const [startAnimation, setStartAnimation] = useState(false);
 
@@ -25,12 +29,52 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
 
     };
 
+    const sortOptions: { key: SortOrderType, title: string }[] = [
+        { key: 'question', title: 'Alphabetically, A-Z' },
+        { key: 'question desc', title: 'Alphabetically, Z-A' },
+        { key: 'date', title: 'Date, old to new' },
+        { key: 'date desc', title: 'Date, new to old' }
+    ];
+
+    const handleMenuButtonClick = useCallback(() => {
+
+        appServices.toggleMenu();
+
+    }, []);
+
+    const handleCreateNewClick = () => {
+
+        appServices.toggleMenu();
+        appServices.setModal('add', null);
+
+    };
+
+    const handleDeleteAllClick = () => {
+
+        appServices.toggleMenu();
+        appServices.setModal('purge', null);
+
+    };
+
+    const handleSortOrderClick = (sortOrder: string) => {
+
+        appServices.toggleMenu();
+        qaServices.sort(sortOrder as SortOrderType);
+
+    };
+
     return (
         <>
 
             <header className={`layout__header ${startAnimation ? 'animate' : ''}`}>
 
                 <div className="layout__header__wrapper">
+
+                    <ButtonMenu
+                        className="layout__header__wrapper__menu-button"
+                        isCrossed={appServices.isMenuExpanded}
+                        onClick={handleMenuButtonClick}
+                    />
 
                     <span className="layout__header__wrapper__app-name">The Awesome Q/A Tool</span>
 
@@ -77,6 +121,43 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
                 </div>
 
             </footer>
+
+            <aside className={`layout__aside ${appServices.isMenuExpanded ? 'layout__aside--expanded' : ''}`}>
+
+                <p className="layout__aside__info">
+                    Here you can find
+                    {` ${qaServices.items.length === 0 ? 'no ' : qaServices.items.length} `}
+                    question
+                    {`${qaServices.items.length === 1 ? '' : 's'}`}
+                    . Feel free to create your own questions.
+                </p>
+
+                <div className="layout__aside__tools">
+
+                    <ButtonIcon
+                        iconName="plus"
+                        text="Create new question"
+                        variant="regular"
+                        onClick={handleCreateNewClick}
+                    />
+
+                    <ButtonIcon
+                        iconName="trash"
+                        text="Delete all"
+                        variant="regular"
+                        onClick={handleDeleteAllClick}
+                    />
+
+                    <SelectBox
+                        title="Sort by"
+                        options={sortOptions}
+                        selectedOption={qaServices.sortOrder}
+                        onSelect={handleSortOrderClick}
+                    />
+
+                </div>
+
+            </aside>
 
             <Modal />
         </>

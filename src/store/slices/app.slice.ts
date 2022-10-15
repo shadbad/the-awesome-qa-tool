@@ -5,12 +5,15 @@ import { ModalActionType, QuestionAnswerType } from 'store/types';
 type AppStateType = {
     modal: 'add' | 'update' | 'delete' | 'purge' | 'none',
 
-    questionAnswer: QuestionAnswerType | null
+    questionAnswer: QuestionAnswerType | null,
+
+    isMenuExpanded: boolean
 };
 
 const initialState: AppStateType = {
     modal: 'none',
-    questionAnswer: null
+    questionAnswer: null,
+    isMenuExpanded: false
 };
 
 const appSlice = createSlice({
@@ -25,6 +28,12 @@ const appSlice = createSlice({
 
             state.modal = action.payload.modal;
             state.questionAnswer = action.payload.questionAnswer;
+
+        },
+
+        toggleMenu: (state) => {
+
+            state.isMenuExpanded = !state.isMenuExpanded;
 
         }
 

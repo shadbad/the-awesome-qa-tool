@@ -20,9 +20,17 @@ function useAppStore() {
 
         },
 
+        toggleMenu() {
+
+            dispatch(appActions.toggleMenu());
+
+        },
+
         modal: data.modal,
 
-        qa: data.questionAnswer
+        qa: data.questionAnswer,
+
+        isMenuExpanded: data.isMenuExpanded
 
     };
 
