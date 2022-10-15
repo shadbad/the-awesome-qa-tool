@@ -9,6 +9,7 @@ const ButtonMenuComponent = function ({ className, isCrossed, onClick }: PropTyp
             type="button"
             className={`icon-menu ${isCrossed ? 'crossed' : ''} ${className}`}
             onClick={onClick}
+            data-testid="button-menu"
         >
 
             <i />

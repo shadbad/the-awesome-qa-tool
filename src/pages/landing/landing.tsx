@@ -22,12 +22,15 @@ function Landing() {
     if (process.env.NODE_ENV === 'test') {
 
         return (
+            <Layout animate animationDelay={0}>
 
-            <ListQA
-                items={qaServices.items}
-                onItemDelete={handleItemDeleteClick}
-                onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
-            />
+                <ListQA
+                    items={qaServices.items}
+                    onItemDelete={handleItemDeleteClick}
+                    onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
+                />
+
+            </Layout>
 
         );
 
