@@ -4,28 +4,13 @@
 .modal {
   position: fixed;
   z-index: 30;
-  top: 16rem;
-  bottom: 16rem;
-  left: 0;
-  width: 100%;
-}
-
-.modal__wrapper {
-  @extend .wrapper;
-  min-height: 100%;
-  padding: 12rem;
-  display: flex;
+  top: 12rem;
+  bottom: 12rem;
+  left: 6rem;
+  right: 6rem;
   justify-content: center;
   align-items: center;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 6rem;
-    bottom: 0;
-    right: 6rem;
-  }
+  display: flex;
 }
 
 .modal__wrapper__inner-wrapper {

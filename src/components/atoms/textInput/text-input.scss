@@ -64,10 +64,8 @@
     line-height: 1.5em;
     padding: 3.125rem 4rem;
     min-height: 12rem;
+    max-height: 30rem;
     @extend .scrollbar;
-  }
-
-  .text-input__label {
   }
 }
 

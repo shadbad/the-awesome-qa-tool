@@ -60,6 +60,7 @@
   transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
   filter: blur(3px) grayscale(100%);
   opacity: 0.5;
+  overflow: hidden;
 }
 
 .layout__footer {
@@ -164,9 +165,14 @@
 
 .layout__header {
   .layout__header__wrapper {
-    .layout__header__wrapper__app-name {
+    .layout__header__wrapper__menu-button {
       clip-path: inset(0 100% 0 0);
       transition: clip-path 0.3s ease-in-out;
+    }
+
+    .layout__header__wrapper__app-name {
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.3s ease-in-out 0.3s;
     }
 
     &::after {
@@ -177,6 +183,7 @@
 
   &.animate {
     .layout__header__wrapper {
+      .layout__header__wrapper__menu-button,
       .layout__header__wrapper__app-name {
         clip-path: inset(0 0 0 0);
       }

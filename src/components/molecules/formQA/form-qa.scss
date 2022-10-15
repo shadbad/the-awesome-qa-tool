@@ -1,9 +1,5 @@
 @use "/src/assets/styles/colors.scss";
 
-.form-qa {
-  max-width: 160rem;
-}
-
 .form-qa__heading {
   font-weight: 700;
   font-size: 5rem;
@@ -25,7 +21,11 @@
 
 .form-qa__button-wrapper {
   display: flex;
-  gap: 6rem;
+  gap: 2rem;
+
+  @media (max-width: 375px) {
+    flex-flow: column;
+  }
 }
 
 .form-qa--count-down {

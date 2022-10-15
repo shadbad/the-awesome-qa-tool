@@ -58,63 +58,60 @@ function Modal({ className }: PropTypes) {
 
         <div className={`modal ${className}`}>
 
-            <div className="modal__wrapper">
+            <div className="modal__wrapper__inner-wrapper">
 
-                <div className="modal__wrapper__inner-wrapper">
+                {
+                    appServices.modal === 'add' && (
 
-                    {
-                        appServices.modal === 'add' && (
+                        <FormQA
+                            variant="create"
+                            questionAnswer={null}
+                            onSubmit={handleCreateSubmit}
+                            onCancel={close}
+                        />
 
-                            <FormQA
-                                variant="create"
-                                questionAnswer={null}
-                                onSubmit={handleCreateSubmit}
-                                onCancel={close}
-                            />
+                    )
+                }
 
-                        )
-                    }
+                {
+                    appServices.modal === 'update' && (
 
-                    {
-                        appServices.modal === 'update' && (
+                        <FormQA
+                            variant="update"
+                            questionAnswer={appServices.qa}
+                            onSubmit={handleUpdateSubmit}
+                            onCancel={close}
+                        />
 
-                            <FormQA
-                                variant="update"
-                                questionAnswer={appServices.qa}
-                                onSubmit={handleUpdateSubmit}
-                                onCancel={close}
-                            />
+                    )
+                }
 
-                        )
-                    }
+                {
+                    appServices.modal === 'delete' && appServices.qa && (
 
-                    {
-                        appServices.modal === 'delete' && appServices.qa && (
+                        <ConfirmBox
+                            message={`Are you sure you want to delete '${clip(appServices.qa.question, 10)}'?`}
+                            onCancel={close}
+                            onConfirm={handleDeleteConfirm}
+                        />
 
-                            <ConfirmBox
-                                message={`Are you sure you want to delete '${clip(appServices.qa.question, 10)}'?`}
-                                onCancel={close}
-                                onConfirm={handleDeleteConfirm}
-                            />
+                    )
+                }
 
-                        )
-                    }
+                {
+                    appServices.modal === 'purge' && (
 
-                    {
-                        appServices.modal === 'purge' && (
+                        <ConfirmBox
+                            message="Are you sure you want to delete all questions?"
+                            onCancel={close}
+                            onConfirm={handlePurgeConfirm}
+                        />
 
-                            <ConfirmBox
-                                message="Are you sure you want to delete all questions?"
-                                onCancel={close}
-                                onConfirm={handlePurgeConfirm}
-                            />
-
-                        )
-                    }
-
-                </div>
+                    )
+                }
 
             </div>
+
         </div>
 
     );
