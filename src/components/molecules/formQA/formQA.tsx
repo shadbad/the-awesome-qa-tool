@@ -100,7 +100,7 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
             intervalId = setInterval(() => {
 
-                if (state.counter === 0) {
+                if (state.counter === 1) {
 
                     onSubmit(state.questionAnswer);
                     clearInterval(intervalId);
@@ -165,12 +165,6 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
             else dispatch({ type: 'setStartCountDown', payload: true });
 
-            // setTimeout(() => {
-
-            //     onSubmit(state.questionAnswer);
-
-            // }, state.defferSave ? 5000 : 0);
-
         }
 
     };
@@ -212,7 +206,7 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
 
             <Checkbox
                 className="form-qa__delay-checkbox"
-                label="Deferred Save"
+                label="Deferred save"
                 checked={state.defferSave}
                 onChange={handelDefferChange}
             />
