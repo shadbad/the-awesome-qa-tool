@@ -15,7 +15,7 @@ function ViewQA({ className, questionAnswer, onEdit, onDelete }: PropTypes) {
 
     return (
 
-        <div className={`view-qa ${isExpanded ? 'view-qa--expanded' : ''} ${className}`}>
+        <div className={`view-qa ${isExpanded ? 'view-qa--expanded' : ''} ${className}`} data-testid={`view-qa-${questionAnswer.id}`}>
 
             <button
                 className="view-qa__question"
