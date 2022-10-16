@@ -48,9 +48,9 @@ describe('FormQA', () => {
 
         renderFormQA();
 
-        const title = screen.getByText('Create a new question');
+        const title = screen.queryByText('Create a new question');
 
-        const submit = screen.getByText('Create Question');
+        const submit = screen.queryByText('Create Question');
 
         expect(title).not.toBeNull();
         expect(submit).not.toBeNull();
@@ -61,9 +61,9 @@ describe('FormQA', () => {
 
         renderFormQA(null, true);
 
-        const title = screen.getByText('Update the selected question');
+        const title = screen.queryByText('Update the selected question');
 
-        const submit = screen.getByText('Update Question');
+        const submit = screen.queryByText('Update Question');
 
         expect(title).not.toBeNull();
         expect(submit).not.toBeNull();

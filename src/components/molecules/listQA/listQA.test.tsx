@@ -53,7 +53,7 @@ describe('ListQA', () => {
 
         renderListQA(0);
 
-        expect(screen.getByText('No questions yet :-(')).not.toBeNull();
+        expect(screen.queryByText('No questions yet :-(')).not.toBeNull();
 
     });
 
