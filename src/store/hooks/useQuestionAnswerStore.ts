@@ -19,12 +19,14 @@ function useQuestionAnswerStore() {
         add(item: QuestionAnswerType): void {
 
             dispatch(questionAnswerActions.add(item));
+            dispatch(questionAnswerActions.sort(data.sortOrder));
 
         },
 
         update(item: QuestionAnswerType): void {
 
             dispatch(questionAnswerActions.update(item));
+            dispatch(questionAnswerActions.sort(data.sortOrder));
 
         },
 
