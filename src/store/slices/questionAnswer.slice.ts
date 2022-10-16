@@ -132,6 +132,7 @@ const syncListener = {
         .map((a) => `questionAnswer/${a}`)
         .includes(action.type),
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     effect: (action: Action, listenerApi: { getState: any; }) => {
 
         const { getState } = listenerApi;
