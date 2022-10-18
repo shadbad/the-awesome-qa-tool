@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ButtonIcon } from 'components/molecules';
-import { generateId } from 'utilities';
 import './button-group.scss';
 
 function ButtonGroup({ className, title, children }: PropTypes) {
@@ -32,7 +31,7 @@ function ButtonGroup({ className, title, children }: PropTypes) {
 
                         <li
                             className="button-group__button-list__item"
-                            key={generateId()}
+                            key={item.key}
                         >
 
                             {item}

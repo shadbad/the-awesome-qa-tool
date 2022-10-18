@@ -36,6 +36,7 @@ function ViewQA({ className, questionAnswer, onEdit, onDelete }: PropTypes) {
                     iconName="edit"
                     text="Edit"
                     variant="regular"
+                    key="edit"
                     onClick={() => onEdit(questionAnswer)}
                 />
 
@@ -43,6 +44,7 @@ function ViewQA({ className, questionAnswer, onEdit, onDelete }: PropTypes) {
                     iconName="trash"
                     text="Delete"
                     variant="regular"
+                    key="delete"
                     onClick={() => onDelete(questionAnswer.id)}
                 />
 
