@@ -1,6 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 import React from 'react';
-import { generateId } from 'utilities';
 import './icon.scss';
 
 const IconComponent = function ({ name, className }: PropTypes) {
@@ -18,7 +18,7 @@ const IconComponent = function ({ name, className }: PropTypes) {
             data-testid={`icon-${name}`}
         >
 
-            {data.paths.map((p) => <path key={generateId()} className="icon__path" d={p} />)}
+            {data.paths.map((p, index) => <path key={`${name}-${index}`} className="icon__path" d={p} />)}
 
         </svg>
     );

@@ -1,5 +1,4 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { generateId } from 'utilities';
 import { Layout } from 'components/organisms';
 import './error-boundary.scss';
 
@@ -66,7 +65,7 @@ class ErrorBoundary extends Component<ErrorBoundaryPropsType, State> {
                         {
                             info.split(' at ').map((item) => item.trim().length > 0 && (
 
-                                <li key={generateId()} className="error-boundary__trace__item">
+                                <li key={item} className="error-boundary__trace__item">
 
                                     {`at ${item}`}
 
