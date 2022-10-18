@@ -24,6 +24,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "linebreak-style": "off",
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "max-len": ["error", { "code": 140 }],
