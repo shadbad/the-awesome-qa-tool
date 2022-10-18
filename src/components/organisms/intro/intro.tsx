@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from 'components/atoms';
 import './intro.scss';
 
@@ -6,9 +6,9 @@ function Intro() {
 
     const [startAnimation, setStartAnimation] = useState(false);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
-        setTimeout(() => setStartAnimation(true), 100);
+        setStartAnimation(true);
 
     }, []);
 

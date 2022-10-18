@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAppStore, useQuestionAnswerStore } from 'store/hooks';
 import { SortOrderType } from 'store/types';
 import { ButtonMenu } from 'components/atoms';
@@ -15,7 +15,7 @@ function Layout({ animate, animationDelay, children }: PropTypes) {
 
     const [startAnimation, setStartAnimation] = useState(false);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         if (animate) setTimeout(() => setStartAnimation(true), animationDelay);
 

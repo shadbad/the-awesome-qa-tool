@@ -1,10 +1,10 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function ShortLived({ duration, children }: PropTypes) {
 
     const [isAlive, setIsAlive] = useState(true);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         if (isAlive) setTimeout(() => setIsAlive(false), duration);
 

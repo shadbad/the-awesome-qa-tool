@@ -1,10 +1,10 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function DelayRender({ duration, children }: PropTypes) {
 
     const [canBeRendered, setCanBeRendered] = useState(false);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         setTimeout(() => {
 
