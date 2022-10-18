@@ -7,9 +7,9 @@ import { QuestionAnswerType } from 'store/types';
 import { generateId } from 'utilities';
 import './form-qa.scss';
 
-function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
+function getInitialState(questionAnswer: QuestionAnswerType | null | undefined) {
 
-    const initialState: StateType = {
+    return {
 
         questionAnswer: questionAnswer || {
             id: generateId(),
@@ -17,80 +17,84 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
             answer: '',
             date: new Date().valueOf()
         },
+
         validationSummary: {
             questionError: '',
             answerError: ''
         },
+
         defferSave: false,
+
         startCountDown: false,
+
         counter: 5
     };
 
-    const [state, dispatch] = useReducer(
+}
 
-        (_state: StateType, action: ActionType) => {
+function reducer(state: StateType, action: ActionType) {
 
-            switch (action.type) {
+    switch (action.type) {
 
-                case 'setQuestion':
-                    return produce(_state, (draft) => {
+        case 'setQuestion':
+            return produce(state, (draft) => {
 
-                        draft.questionAnswer.question = action.payload as string;
+                draft.questionAnswer.question = action.payload as string;
 
-                    });
+            });
 
-                case 'setAnswer':
-                    return produce(_state, (draft) => {
+        case 'setAnswer':
+            return produce(state, (draft) => {
 
-                        draft.questionAnswer.answer = action.payload as string;
+                draft.questionAnswer.answer = action.payload as string;
 
-                    });
+            });
 
-                case 'setDeffer':
-                    return produce(_state, (draft) => {
+        case 'setDeffer':
+            return produce(state, (draft) => {
 
-                        draft.defferSave = action.payload as boolean;
+                draft.defferSave = action.payload as boolean;
 
-                    });
+            });
 
-                case 'setQuestionValidation':
-                    return produce(_state, (draft) => {
+        case 'setQuestionValidation':
+            return produce(state, (draft) => {
 
-                        draft.validationSummary.questionError = action.payload as string;
+                draft.validationSummary.questionError = action.payload as string;
 
-                    });
+            });
 
-                case 'setAnswerValidation':
-                    return produce(_state, (draft) => {
+        case 'setAnswerValidation':
+            return produce(state, (draft) => {
 
-                        draft.validationSummary.answerError = action.payload as string;
+                draft.validationSummary.answerError = action.payload as string;
 
-                    });
+            });
 
-                case 'setStartCountDown':
-                    return produce(_state, (draft) => {
+        case 'setStartCountDown':
+            return produce(state, (draft) => {
 
-                        draft.startCountDown = action.payload as boolean;
+                draft.startCountDown = action.payload as boolean;
 
-                    });
+            });
 
-                case 'setCounter':
-                    return produce(_state, (draft) => {
+        case 'setCounter':
+            return produce(state, (draft) => {
 
-                        draft.counter = action.payload as number;
+                draft.counter = action.payload as number;
 
-                    });
+            });
 
-                default:
-                    throw new Error('unknown command');
+        default:
+            throw new Error('unknown command');
 
-            }
+    }
 
-        },
+}
 
-        initialState
+function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
 
-    );
+    const [state, dispatch] = useReducer(reducer, getInitialState(questionAnswer));
 
     useEffect(() => {
 
