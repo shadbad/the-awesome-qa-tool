@@ -1,32 +1,29 @@
 /* eslint-disable padded-blocks */
-import { screen, fireEvent, render, act, getByTestId, queryByText } from '@testing-library/react';
+import { screen, fireEvent, render, act, within } from '@testing-library/react';
+import user from '@testing-library/user-event';
 import { App } from './app';
 
 describe('App Integration Test Suit', () => {
     const addItem = async (question: string, answer: string) => {
-        const createButton = screen.getByText('Create new question');
+        const createButton = screen.getByRole('button', { name: 'Create new question' });
 
-        await act(() => {
-            fireEvent.click(createButton);
-        });
+        await user.click(createButton);
 
-        const questionInput = screen.getByLabelText('Question');
+        const questionInput = screen.getByRole('textbox', { name: 'Question' });
 
-        fireEvent.change(questionInput, { target: { value: question } });
+        await user.type(questionInput, question);
 
-        const answerInput = screen.getByLabelText('Answer');
+        const answerInput = screen.getByRole('textbox', { name: 'Answer' });
 
-        fireEvent.change(answerInput, { target: { value: answer } });
+        await user.type(answerInput, answer);
 
-        const submitButton = screen.getByText('Create Question');
+        const submitButton = screen.getByRole('button', { name: 'Create Question' });
 
-        await act(() => {
-            fireEvent.click(submitButton);
-        });
+        await user.click(submitButton);
     };
 
     const confirmItemExists = async (question: string, answer: string) => {
-        const newQuestion = screen.queryByText(question, { selector: '.view-qa__question' });
+        const newQuestion = screen.queryByRole('button', { name: question });
 
         if (!newQuestion) return false;
 
@@ -34,21 +31,19 @@ describe('App Integration Test Suit', () => {
 
         if (!container) throw new Error('Can not find the parent container.');
 
-        const newAnswer = queryByText(container, answer);
+        const newAnswer = within(container).queryByText(answer);
 
         return newAnswer != null;
     };
 
     const confirm = async () => {
-        const confirmButton = screen.getByText('Ok');
+        const confirmButton = screen.getByRole('button', { name: 'Ok' });
 
-        await act(() => {
-            fireEvent.click(confirmButton);
-        });
+        await user.click(confirmButton);
     };
 
     const getItemButton = async (question: string, answer: string, button: 'edit' | 'delete') => {
-        const questionElement = screen.queryByText(question);
+        const questionElement = screen.queryByRole('button', { name: question });
 
         expect(questionElement).toBeInTheDocument();
 
@@ -56,12 +51,16 @@ describe('App Integration Test Suit', () => {
 
         if (container == null) throw new Error('Can not find the parent container.');
 
-        expect(queryByText(container, answer)).toBeInTheDocument();
+        const answerElement = within(container).queryByText(answer);
 
-        return getByTestId(container, button === 'delete' ? 'icon-trash' : 'icon-edit');
+        expect(answerElement).toBeInTheDocument();
+
+        return within(container).getByTestId(button === 'delete' ? 'icon-trash' : 'icon-edit');
     };
 
     beforeEach(async () => {
+        user.setup();
+
         await act(() => {
             render(<App />);
         });
@@ -90,31 +89,31 @@ describe('App Integration Test Suit', () => {
 
         const editButton = await getItemButton('How to add a question?', 'Just click the add button.', 'edit');
 
-        await act(() => {
-            fireEvent.click(editButton);
-        });
+        await user.click(editButton);
 
-        expect(screen.queryByText('Update the selected question')).toBeInTheDocument();
+        expect(screen.queryByRole('heading', { name: 'Update the selected question' })).toBeInTheDocument();
 
-        const questionInput = screen.getByLabelText('Question') as HTMLInputElement;
+        const questionInput = screen.getByRole('textbox', { name: 'Question' });
 
-        expect(questionInput.value).toBe('How to add a question?');
+        expect(questionInput).toHaveValue('How to add a question?');
 
-        fireEvent.change(questionInput, { target: { value: 'Question 1' } });
+        await user.clear(questionInput);
 
-        const answerInput = screen.getByLabelText('Answer') as HTMLInputElement;
+        await user.type(questionInput, 'Question 1');
 
-        expect(answerInput.value).toBe('Just click the add button.');
+        const answerInput = screen.getByRole('textbox', { name: 'Answer' });
 
-        fireEvent.change(answerInput, { target: { value: 'Answer 1' } });
+        expect(answerInput).toHaveValue('Just click the add button.');
 
-        const submitButton = screen.getByText('Update Question');
+        await user.clear(answerInput);
 
-        await act(() => {
-            fireEvent.click(submitButton);
-        });
+        await user.type(answerInput, 'Answer 1');
 
-        expect(screen.queryByText('How to add a question?')).not.toBeInTheDocument();
+        const submitButton = screen.getByRole('button', { name: 'Update Question' });
+
+        await user.click(submitButton);
+
+        expect(screen.queryByRole('button', { name: 'How to add a question?' })).not.toBeInTheDocument();
 
         expect(await confirmItemExists('Question 1', 'Answer 1')).toBeTruthy();
     });
@@ -124,13 +123,11 @@ describe('App Integration Test Suit', () => {
 
         expect(qaItems.length).toBeGreaterThanOrEqual(1);
 
-        const deleteAllButton = screen.getByText('Delete all');
+        const deleteAllButton = screen.getByRole('button', { name: 'Delete all' });
 
-        await act(() => {
-            fireEvent.click(deleteAllButton);
-        });
+        await user.click(deleteAllButton);
 
-        confirm();
+        await confirm();
 
         expect(screen.queryByText(/(?:)/, { selector: '.view-qa' })).not.toBeInTheDocument();
     });
@@ -142,11 +139,9 @@ describe('App Integration Test Suit', () => {
 
         expect(screen.queryAllByText(/(?:)/, { selector: '.view-qa' })).toHaveLength(3);
 
-        const AlphabeticallyDesc = screen.getByText('Alphabetically, Z-A');
+        const AlphabeticallyDesc = screen.getByRole('button', { name: 'Alphabetically, Z-A' });
 
-        await act(() => {
-            fireEvent.click(AlphabeticallyDesc);
-        });
+        await user.click(AlphabeticallyDesc);
 
         const items = screen.queryAllByText(/(?:)/, { selector: '.view-qa' });
 
@@ -158,11 +153,9 @@ describe('App Integration Test Suit', () => {
     it('Can sort items by question from a to z', async () => {
         expect(screen.queryAllByText(/(?:)/, { selector: '.view-qa' })).toHaveLength(3);
 
-        const AlphabeticallyDesc = screen.getByText('Alphabetically, A-Z');
+        const AlphabeticallyDesc = screen.getByRole('button', { name: 'Alphabetically, A-Z' });
 
-        await act(() => {
-            fireEvent.click(AlphabeticallyDesc);
-        });
+        await user.click(AlphabeticallyDesc);
 
         const items = screen.queryAllByText(/(?:)/, { selector: '.view-qa' });
 
