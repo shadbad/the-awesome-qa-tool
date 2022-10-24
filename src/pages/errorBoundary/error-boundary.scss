@@ -1,4 +1,10 @@
 @use '/src/assets/styles/colors.scss';
+@use '/src/assets/styles/shared.scss';
+
+.error-boundary {
+    @extend .wrapper;
+    padding-top: 8rem;
+}
 
 .error-boundary__heading {
     text-align: center;

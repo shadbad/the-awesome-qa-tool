@@ -1,24 +1,14 @@
+/* eslint-disable react/static-property-placement */
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { Layout } from 'components/organisms';
 import './error-boundary.scss';
 
-type ErrorBoundaryPropsType = {
-    children?: ReactNode;
-};
-
-type State = {
-    hasError: boolean;
-    error: string;
-    info: string;
-};
-
-class ErrorBoundary extends Component<ErrorBoundaryPropsType, State> {
-    // eslint-disable-next-line react/static-property-placement
-    static defaultProps: ErrorBoundaryPropsType = {
+class ErrorBoundary extends Component<propTypes, stateType> {
+    static defaultProps: propTypes = {
         children: null
     };
 
-    constructor(props: ErrorBoundaryPropsType) {
+    constructor(props: propTypes) {
         super(props);
 
         this.state = {
@@ -28,12 +18,16 @@ class ErrorBoundary extends Component<ErrorBoundaryPropsType, State> {
         };
     }
 
-    public static getDerivedStateFromError(error: Error): State {
+    public static getDerivedStateFromError(error: Error): stateType {
         return { hasError: true, error: error.message, info: '' };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        this.setState({ hasError: true, error: error.message, info: errorInfo.componentStack });
+        this.setState({
+            hasError: true,
+            error: error.message,
+            info: errorInfo.componentStack
+        });
     }
 
     public render() {
@@ -42,7 +36,7 @@ class ErrorBoundary extends Component<ErrorBoundaryPropsType, State> {
 
         if (hasError) {
             return (
-                <Layout>
+                <div className="error-boundary">
                     <h1 className="error-boundary__heading">Sorry.. there was an error</h1>
 
                     <h2 className="error-boundary__title">{error}</h2>
@@ -57,12 +51,22 @@ class ErrorBoundary extends Component<ErrorBoundaryPropsType, State> {
                                 )
                         )}
                     </ul>
-                </Layout>
+                </div>
             );
         }
 
         return children;
     }
 }
+
+type propTypes = {
+    children?: ReactNode;
+};
+
+type stateType = {
+    hasError: boolean;
+    error: string;
+    info: string;
+};
 
 export { ErrorBoundary };
