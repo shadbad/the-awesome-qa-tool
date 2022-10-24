@@ -1,26 +1,26 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 .wrapper {
-  max-width: 300rem;
-  width: 100%;
-  position: relative;
-  margin: auto;
-  box-sizing: border-box;
-  padding: 0 6rem;
-  height: auto;
+    max-width: 300rem;
+    width: 100%;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 0 6rem;
+    height: auto;
 }
 
 .scrollbar {
-  &::-webkit-scrollbar {
-    width: 2rem;
-    height: 2rem;
-  }
+    &::-webkit-scrollbar {
+        width: 2rem;
+        height: 2rem;
+    }
 
-  &::-webkit-scrollbar-track {
-    background: linear-gradient(to bottom, transparent, rgba(colors.$charcoal500, 0.5), transparent);
-  }
+    &::-webkit-scrollbar-track {
+        background: linear-gradient(to bottom, transparent, rgba(colors.$charcoal500, 0.5), transparent);
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(colors.$charcoal300, 0.25);
-    border-radius: 1rem;
-  }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(colors.$charcoal300, 0.25);
+        border-radius: 1rem;
+    }
 }

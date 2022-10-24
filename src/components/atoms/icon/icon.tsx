@@ -4,7 +4,6 @@ import React from 'react';
 import './icon.scss';
 
 const IconComponent = function ({ name, className }: PropTypes) {
-
     const data = IconComponent.getIconData(name);
 
     return (
@@ -17,18 +16,17 @@ const IconComponent = function ({ name, className }: PropTypes) {
             className={`icon ${name} ${className}`}
             data-testid={`icon-${name}`}
         >
-
-            {data.paths.map((p, index) => <path key={`${name}-${index}`} className="icon__path" d={p} />)}
-
+            {data.paths.map((p, index) => (
+                <path key={`${name}-${index}`} className="icon__path" d={p} />
+            ))}
         </svg>
     );
-
 };
 
 type PropTypes = {
-    name: string,
-    className?: string
-}
+    name: string;
+    className?: string;
+};
 
 IconComponent.defaultProps = {
     className: ''
@@ -42,19 +40,13 @@ IconComponent.data = {
                 paths: [
                     'M299.52 312.747c-165.12 0-299.52 129.707-299.52 290.987 0 75.52 29.867 145.493 79.787 196.267-2.133 49.92-9.813 118.613-40.107 153.173 57.6 0 115.2-46.507 151.040-79.787 34.56 13.227 70.827 20.053 109.653 20.053 165.12 0 299.52-129.707 299.52-290.56 0.427-161.28-134.827-290.133-300.373-290.133v0zM299.52 867.413c-34.56 0-68.693-6.827-101.12-18.773l-14.507-5.547-11.093 11.093c-20.053 18.773-51.2 46.507-85.333 61.013 9.813-31.147 16.64-68.693 17.92-115.2v-11.093l-7.68-7.68c-46.507-49.067-72.107-113.493-72.107-180.053-1.28-145.067 122.027-264.107 273.92-264.107 151.040 0 273.92 118.613 273.92 264.96 0 146.773-122.88 265.387-273.92 265.387v0zM981.76 715.52c-20.907-24.32-34.56-74.24-36.693-139.947 51.2-55.467 78.933-126.293 78.933-201.813 0-167.68-139.947-302.933-311.893-302.933-114.347 0-219.733 61.013-273.92 157.44-3.413 5.547-1.28 13.227 4.267 16.64s13.227 1.28 16.64-4.267c49.92-90.027 147.627-145.493 251.733-145.493 158.72 0 287.147 124.16 287.147 277.333 0 69.973-26.453 136.533-75.52 188.587l-3.413 3.413v5.547c1.28 43.093 7.68 97.707 27.733 136.533-46.507-11.093-92.16-48.64-116.48-73.387l-5.547-5.547-7.68 3.413c-33.28 13.227-68.693 20.053-105.387 20.053-6.827 0-12.373 5.547-12.373 12.373s5.547 12.373 12.373 12.373c36.693 0 73.387-6.827 107.52-18.773 40.107 36.693 96.427 77.653 153.173 77.653h27.733l-18.347-19.2zM646.827 334.933c-16.64 0-29.013 13.227-29.013 29.013 0 16.64 13.227 29.013 29.013 29.013 16.64 0 29.013-13.227 29.013-29.013 0-16.64-12.373-29.013-29.013-29.013zM736.853 334.933c-16.64 0-29.013 13.227-29.013 29.013 0 16.64 13.227 29.013 29.013 29.013s29.013-13.227 29.013-29.013c-0.427-16.64-13.653-29.013-29.013-29.013zM826.453 334.933c-16.64 0-29.013 13.227-29.013 29.013 0 16.64 13.227 29.013 29.013 29.013 16.64 0 29.013-13.227 29.013-29.013 0-16.64-13.227-29.013-29.013-29.013zM228.693 506.027c4.267-3.413 8.96-7.68 13.227-11.093s9.813-6.827 15.36-8.96c5.547-2.133 12.373-4.267 18.773-6.827 6.827-2.133 14.507-2.133 22.187-2.133 9.813 0 20.053 1.28 29.013 4.267 8.96 3.413 16.64 6.827 22.187 12.373 6.827 5.547 11.093 12.373 15.36 20.053 3.413 7.68 5.547 16.64 5.547 26.453s-1.28 18.773-4.267 25.6c-3.413 6.827-6.827 13.227-11.093 18.773s-8.96 9.813-14.507 14.507c-5.547 4.267-9.813 7.68-14.507 11.093-4.267 3.413-8.96 6.827-12.373 9.813-3.413 3.413-6.827 3.413-7.68 7.68l-2.133 9.813h-23.040l-2.133-20.907c0-5.547 1.28-5.547 3.413-9.813s6.827-5.547 11.093-8.96c4.267-3.413 8.96-6.827 14.507-9.813 5.547-3.413 9.813-6.827 14.507-11.093 4.267-4.267 8.96-8.96 11.093-15.36 3.413-5.547 4.267-12.373 4.267-20.907 0-5.547-1.28-11.093-3.413-15.36s-5.547-8.96-8.96-11.093c-3.413-3.413-7.68-5.547-13.227-7.68s-11.093-2.133-16.64-2.133c-7.68 0-14.507 1.28-20.053 3.413s-9.813 4.267-14.507 6.827-6.827 4.267-9.813 6.827c-2.133 2.133-4.267 3.413-5.547 3.413-3.413 0-5.547-1.28-7.68-4.267l-8.96-14.507zM269.653 713.387c0-3.413 0-5.547 1.28-8.96 1.28-2.133 2.133-4.267 4.267-6.827 2.133-2.133 4.267-3.413 6.827-4.267 2.133-1.28 5.547-2.133 8.96-2.133s5.547 1.28 8.96 2.133c2.133 1.28 4.267 2.133 6.827 4.267 2.133 2.133 3.413 4.267 4.267 6.827 1.28 2.133 2.133 5.547 2.133 8.96s-1.28 5.547-2.133 8.96c-1.28 2.133-2.133 4.267-4.267 6.827-2.133 2.133-4.267 3.413-6.827 4.267-2.133 1.28-5.547 1.28-8.96 1.28s-5.547 0-8.96-1.28c-2.133-1.28-4.267-2.133-6.827-4.267-2.133-2.133-3.413-4.267-4.267-6.827-0.427-3.413-1.28-6.827-1.28-8.96z'
                 ],
-                attrs: [
-                    {}
-                ],
+                attrs: [{}],
                 isMulticolor: false,
                 isMulticolor2: false,
                 grid: 24,
-                tags: [
-                    'qa-logo-icon-bw'
-                ]
+                tags: ['qa-logo-icon-bw']
             },
-            attrs: [
-                {}
-            ],
+            attrs: [{}],
             properties: {
                 order: 14,
                 id: 283,
@@ -74,9 +66,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'bar-chart'
-                ],
+                tags: ['bar-chart'],
                 grid: 24
             },
             attrs: [],
@@ -99,9 +89,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'check'
-                ],
+                tags: ['check'],
                 grid: 24
             },
             attrs: [],
@@ -124,9 +112,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'check-square'
-                ],
+                tags: ['check-square'],
                 grid: 24
             },
             attrs: [],
@@ -149,9 +135,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'chevron-down'
-                ],
+                tags: ['chevron-down'],
                 grid: 24
             },
             attrs: [],
@@ -174,9 +158,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'chevron-left'
-                ],
+                tags: ['chevron-left'],
                 grid: 24
             },
             attrs: [],
@@ -199,9 +181,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'chevron-right'
-                ],
+                tags: ['chevron-right'],
                 grid: 24
             },
             attrs: [],
@@ -224,9 +204,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'chevron-up'
-                ],
+                tags: ['chevron-up'],
                 grid: 24
             },
             attrs: [],
@@ -249,9 +227,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'edit-3'
-                ],
+                tags: ['edit-3'],
                 grid: 24
             },
             attrs: [],
@@ -274,9 +250,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'github'
-                ],
+                tags: ['github'],
                 grid: 24
             },
             attrs: [],
@@ -299,9 +273,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'linkedin'
-                ],
+                tags: ['linkedin'],
                 grid: 24
             },
             attrs: [],
@@ -324,9 +296,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'more-horizontal'
-                ],
+                tags: ['more-horizontal'],
                 grid: 24
             },
             attrs: [],
@@ -349,9 +319,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'more-vertical'
-                ],
+                tags: ['more-vertical'],
                 grid: 24
             },
             attrs: [],
@@ -374,9 +342,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'plus'
-                ],
+                tags: ['plus'],
                 grid: 24
             },
             attrs: [],
@@ -399,9 +365,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'square'
-                ],
+                tags: ['square'],
                 grid: 24
             },
             attrs: [],
@@ -424,9 +388,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'trash'
-                ],
+                tags: ['trash'],
                 grid: 24
             },
             attrs: [],
@@ -449,9 +411,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'twitter'
-                ],
+                tags: ['twitter'],
                 grid: 24
             },
             attrs: [],
@@ -474,9 +434,7 @@ IconComponent.data = {
                 attrs: [],
                 isMulticolor: false,
                 isMulticolor2: false,
-                tags: [
-                    'x'
-                ],
+                tags: ['x'],
                 grid: 24
             },
             attrs: [],
@@ -526,7 +484,6 @@ IconComponent.data = {
 };
 
 IconComponent.getIconData = (name: string) => {
-
     const item = IconComponent.data.icons.find((x) => x.properties.name === name);
 
     if (!item) return { height: 0, size: 0, paths: [] };
@@ -536,7 +493,6 @@ IconComponent.getIconData = (name: string) => {
         size: item?.icon.grid || 0,
         paths: item?.icon.paths || ['']
     };
-
 };
 
 const Icon = React.memo(IconComponent, (p, n) => p.name === n.name);

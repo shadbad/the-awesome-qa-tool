@@ -1,59 +1,49 @@
 export interface PrimitiveActionType<T> {
-
-    type: string,
-    payload: T
-
+    type: string;
+    payload: T;
 }
 
 export type ModalActionType = {
-
-    type: string,
+    type: string;
     payload: {
-        modal: 'add' | 'update' | 'delete' | 'purge' | 'none',
-        questionAnswer: QuestionAnswerType | null
-    }
-
-}
+        modal: 'add' | 'update' | 'delete' | 'purge' | 'none';
+        questionAnswer: QuestionAnswerType | null;
+    };
+};
 
 export type SliceStatus = {
-
-    type: 'loading' | 'error' | 'loaded',
-    message: string
-
-}
+    type: 'loading' | 'error' | 'loaded';
+    message: string;
+};
 
 export type QuestionAnswerType = {
-
-    readonly id: string,
-    question: string,
-    answer: string
-    date: number
-
-}
+    readonly id: string;
+    question: string;
+    answer: string;
+    date: number;
+};
 
 export type QuestionAnswerService = {
+    find: (id: string) => QuestionAnswerType | undefined;
 
-    find: (id: string) => QuestionAnswerType | undefined,
+    add: (item: QuestionAnswerType) => void;
 
-    add: (item: QuestionAnswerType) => void,
+    update: (item: QuestionAnswerType) => void;
 
-    update: (item: QuestionAnswerType) => void,
+    delete: (id: string) => void;
 
-    delete: (id: string) => void,
+    purge: () => void;
 
-    purge: () => void,
-
-    sort: (order: 'date' | 'date desc' | 'question' | 'question desc') => void,
+    sort: (order: 'date' | 'date desc' | 'question' | 'question desc') => void;
 
     getStatus: () => {
-        type: 'error' | 'loaded' | 'loading',
-        message: string
-    },
+        type: 'error' | 'loaded' | 'loading';
+        message: string;
+    };
 
-    items: QuestionAnswerType[],
+    items: QuestionAnswerType[];
 
-    sortOrder: 'date' | 'date desc' | 'question' | 'question desc'
-
-}
+    sortOrder: 'date' | 'date desc' | 'question' | 'question desc';
+};
 
 export type SortOrderType = 'question' | 'question desc' | 'date' | 'date desc';

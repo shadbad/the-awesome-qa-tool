@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ModalActionType, QuestionAnswerType } from 'store/types';
 
 type AppStateType = {
-    modal: 'add' | 'update' | 'delete' | 'purge' | 'none',
+    modal: 'add' | 'update' | 'delete' | 'purge' | 'none';
 
-    questionAnswer: QuestionAnswerType | null,
+    questionAnswer: QuestionAnswerType | null;
 
-    isMenuExpanded: boolean
+    isMenuExpanded: boolean;
 };
 
 const initialState: AppStateType = {
@@ -17,28 +17,20 @@ const initialState: AppStateType = {
 };
 
 const appSlice = createSlice({
-
     name: 'app',
 
     initialState,
 
     reducers: {
-
         setModal: (state, action: ModalActionType) => {
-
             state.modal = action.payload.modal;
             state.questionAnswer = action.payload.questionAnswer;
-
         },
 
         toggleMenu: (state) => {
-
             state.isMenuExpanded = !state.isMenuExpanded;
-
         }
-
     }
-
 });
 
 export const actions = { ...appSlice.actions };

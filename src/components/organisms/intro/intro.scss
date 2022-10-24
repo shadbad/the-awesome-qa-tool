@@ -1,98 +1,98 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 
 .intro {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 160rem;
-  width: 100%;
-  padding: 0 6rem;
-  box-sizing: border-box;
-  text-align: center;
-  color: colors.$charcoal200;
-  z-index: 18;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 160rem;
+    width: 100%;
+    padding: 0 6rem;
+    box-sizing: border-box;
+    text-align: center;
+    color: colors.$charcoal200;
+    z-index: 18;
 }
 
 .intro__logo {
-  width: 80rem;
-  height: 80rem;
-  margin-bottom: 8rem;
-  path {
-    stroke: colors.$charcoal300;
-    stroke-width: 1rem;
-    fill: transparent;
-  }
+    width: 80rem;
+    height: 80rem;
+    margin-bottom: 8rem;
+    path {
+        stroke: colors.$charcoal300;
+        stroke-width: 1rem;
+        fill: transparent;
+    }
 
-  @media (max-width: 500px) {
-    width: 50rem;
-    height: 50rem;
-    margin-bottom: 4rem;
-  }
+    @media (max-width: 500px) {
+        width: 50rem;
+        height: 50rem;
+        margin-bottom: 4rem;
+    }
 }
 
 .intro__heading {
-  font-size: 10rem;
-  line-height: 1em;
-  font-weight: 700;
-  margin-bottom: 4rem;
+    font-size: 10rem;
+    line-height: 1em;
+    font-weight: 700;
+    margin-bottom: 4rem;
 
-  @media (max-width: 500px) {
-    font-size: 6rem;
-    margin-bottom: 2rem;
-  }
+    @media (max-width: 500px) {
+        font-size: 6rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .intro__description {
-  font-size: 4rem;
-  letter-spacing: 1rem;
-  word-spacing: 2rem;
+    font-size: 4rem;
+    letter-spacing: 1rem;
+    word-spacing: 2rem;
 
-  @media (max-width: 500px) {
-    font-size: 3rem;
-    word-spacing: 1rem;
-  }
+    @media (max-width: 500px) {
+        font-size: 3rem;
+        word-spacing: 1rem;
+    }
 }
 
 // animation preparation
 
 .intro {
-  transition: opacity 1s ease-in-out 5s;
-
-  .intro__logo {
-    path {
-      stroke-dasharray: 750rem;
-      stroke-dashoffset: 750rem;
-    }
-  }
-
-  .intro__heading {
-    clip-path: inset(0 50% 0 50%);
-  }
-
-  .intro__description {
-    opacity: 0;
-    transform: translateY(4rem);
-  }
-
-  &.animate {
-    opacity: 1;
+    transition: opacity 1s ease-in-out 5s;
 
     .intro__logo {
-      path {
-        transition: stroke-dashoffset 2s ease-in-out, fill 0.5s ease-in-out 2s;
-        stroke-dashoffset: 0;
-        fill: colors.$charcoal200;
-      }
+        path {
+            stroke-dasharray: 750rem;
+            stroke-dashoffset: 750rem;
+        }
     }
+
     .intro__heading {
-      transition: clip-path 1s ease-in-out 1.5s;
-      clip-path: inset(0 0 0 0);
+        clip-path: inset(0 50% 0 50%);
     }
+
     .intro__description {
-      transition: opacity 1s ease-in-out 2s, transform 1s ease-in-out 2s;
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 0;
+        transform: translateY(4rem);
     }
-  }
+
+    &.animate {
+        opacity: 1;
+
+        .intro__logo {
+            path {
+                transition: stroke-dashoffset 2s ease-in-out, fill 0.5s ease-in-out 2s;
+                stroke-dashoffset: 0;
+                fill: colors.$charcoal200;
+            }
+        }
+        .intro__heading {
+            transition: clip-path 1s ease-in-out 1.5s;
+            clip-path: inset(0 0 0 0);
+        }
+        .intro__description {
+            transition: opacity 1s ease-in-out 2s, transform 1s ease-in-out 2s;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 }

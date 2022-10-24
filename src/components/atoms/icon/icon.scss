@@ -1,11 +1,11 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 
 .icon {
-  width: 6rem;
-  height: 6rem;
+    width: 6rem;
+    height: 6rem;
 }
 
 .icon__path {
-  transition: fill 0.3s ease-in-out;
-  fill: colors.$charcoal100;
+    transition: fill 0.3s ease-in-out;
+    fill: colors.$charcoal100;
 }

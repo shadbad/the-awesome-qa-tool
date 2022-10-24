@@ -3,18 +3,16 @@ import { createSlice, createAsyncThunk, Action } from '@reduxjs/toolkit';
 import { PrimitiveActionType, QuestionAnswerType, SortOrderType } from 'store/types';
 
 type QuestionAnswerStateType = {
-    isLoading: boolean,
-    error: string,
-    items: QuestionAnswerType[],
-    sortOrder: SortOrderType
+    isLoading: boolean;
+    error: string;
+    items: QuestionAnswerType[];
+    sortOrder: SortOrderType;
 };
 
 const fetch = createAsyncThunk('questionAnswer/fetch', () => {
-
     const localStorageData = window.localStorage.getItem('questionAnswers');
 
     return localStorageData ? JSON.parse(localStorageData) : [];
-
 });
 
 const initialState: QuestionAnswerStateType = {
@@ -32,109 +30,78 @@ const initialState: QuestionAnswerStateType = {
 };
 
 const questionAnswerSlice = createSlice({
-
     name: 'questionAnswer',
 
     initialState,
 
     reducers: {
-
         add: (state, action: PrimitiveActionType<QuestionAnswerType>) => {
-
             state.items = [...state.items, action.payload];
-
         },
 
         update: (state, action: PrimitiveActionType<QuestionAnswerType>) => {
-
             const index = state.items.findIndex((x) => x.id === action.payload.id);
 
-            state.items = [
-                ...state.items.slice(0, index),
-                action.payload,
-                ...state.items.slice(index + 1)
-            ];
-
+            state.items = [...state.items.slice(0, index), action.payload, ...state.items.slice(index + 1)];
         },
 
         delete: (state, action: PrimitiveActionType<string>) => {
-
             state.items = state.items.filter((item) => item.id !== action.payload);
-
         },
 
         purge: (state) => {
-
             state.items = [];
-
         },
 
         sort: (state, action: PrimitiveActionType<SortOrderType>) => {
-
             state.items = [...state.items].sort((a, b) => {
-
                 const property = action.payload.split(' ')[0].trim() as 'question' | 'date';
 
                 if (a[property] === b[property]) return 0;
 
                 if (action.payload.endsWith(' desc')) {
-
                     return a[property] < b[property] ? 1 : -1;
-
                 }
 
                 return a[property] < b[property] ? -1 : 1;
-
             });
 
             state.sortOrder = action.payload;
-
         }
     },
 
     extraReducers: (builder) => {
-
         builder.addCase(fetch.pending, (state) => {
-
             state.isLoading = true;
             state.error = '';
             state.sortOrder = initialState.sortOrder;
             state.items = initialState.items;
-
         });
 
         builder.addCase(fetch.rejected, (state, action) => {
-
             state.isLoading = false;
             state.error = action.error?.message ?? 'Error';
             state.sortOrder = initialState.sortOrder;
             state.items = initialState.items;
-
         });
 
         builder.addCase(fetch.fulfilled, (state, action) => {
-
             state.isLoading = false;
             state.error = '';
             state.sortOrder = action.payload.sortOrder || initialState.sortOrder;
             state.items = action.payload.items || initialState.items;
-
         });
-
     }
-
 });
 
 const syncListener = {
-
-    predicate: (action: Action) => Object
-        .keys(questionAnswerSlice.actions)
-        .map((a) => `questionAnswer/${a}`)
-        .includes(action.type),
+    predicate: (action: Action) =>
+        Object.keys(questionAnswerSlice.actions)
+            .map((a) => `questionAnswer/${a}`)
+            .includes(action.type),
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    effect: (action: Action, listenerApi: { getState: any; }) => {
-
+    effect: (action: Action, listenerApi: { getState: any }) => {
         const { getState } = listenerApi;
         const { questionAnswer } = getState();
 
@@ -145,7 +112,6 @@ const syncListener = {
                 sortOrder: questionAnswer.sortOrder
             })
         );
-
     }
 };
 

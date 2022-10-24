@@ -3,19 +3,14 @@ import { ButtonIcon } from 'components/molecules';
 import './button-group.scss';
 
 function ButtonGroup({ className, title, children }: PropTypes) {
-
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleMoreButtonClick = () => {
-
         setIsExpanded(!isExpanded);
-
     };
 
     return (
-
         <div className={`button-group${isExpanded ? '--expanded' : ''} ${className}`}>
-
             <ButtonIcon
                 variant="tooltip"
                 iconName={isExpanded ? 'cross' : 'more-vertical'}
@@ -25,42 +20,24 @@ function ButtonGroup({ className, title, children }: PropTypes) {
             />
 
             <ul className="button-group__button-list">
-
-                {
-                    children.map((item) => (
-
-                        <li
-                            className="button-group__button-list__item"
-                            key={item.key}
-                        >
-
-                            {item}
-
-                        </li>
-
-                    ))
-                }
-
+                {children.map((item) => (
+                    <li className="button-group__button-list__item" key={item.key}>
+                        {item}
+                    </li>
+                ))}
             </ul>
-
         </div>
-
     );
-
 }
 
 type PropTypes = {
-
-    className?: string,
-    title: string,
-    children: React.ReactElement<typeof ButtonIcon>[]
-
-}
+    className?: string;
+    title: string;
+    children: React.ReactElement<typeof ButtonIcon>[];
+};
 
 ButtonGroup.defaultProps = {
-
     className: ''
-
 };
 
 export { ButtonGroup };

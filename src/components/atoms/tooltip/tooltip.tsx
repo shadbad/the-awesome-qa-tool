@@ -2,14 +2,12 @@ import React, { useState, useRef } from 'react';
 import './tooltip.scss';
 
 function Tooltip({ className, tip, children }: PropTypes) {
-
     const [tipVisibility, setTipVisibility] = useState(false);
 
     const toolTipRef = useRef<HTMLSpanElement>(null);
     const toolTipTriangleRef = useRef<HTMLLIElement>(null);
 
     const handleMouseMove = (event: React.MouseEvent) => {
-
         const toolTipElement = toolTipRef.current;
         const toolTipTriangleElement = toolTipTriangleRef.current;
 
@@ -30,19 +28,15 @@ function Tooltip({ className, tip, children }: PropTypes) {
 
         // fits below?
         if (height + PADDING < innerHeight - clientY) {
-
             top = clientY + PADDING;
             toolTipTriangleElement.style.left = `${clientX - PADDING / 2}px`;
             toolTipTriangleElement.style.top = `${clientY + PADDING + 1}px`;
             toolTipTriangleElement.style.transform = 'rotate(-45deg)';
-
         } else {
-
             top = clientY - height - PADDING;
             toolTipTriangleElement.style.left = `${clientX + PADDING / 2}px`;
             toolTipTriangleElement.style.top = `${clientY - PADDING - 1}px`;
             toolTipTriangleElement.style.transform = 'rotate(135deg)';
-
         }
 
         // fits right or left
@@ -54,47 +48,33 @@ function Tooltip({ className, tip, children }: PropTypes) {
         toolTipElement.style.width = `${width}px`;
 
         setTipVisibility(true);
-
     };
 
     const handleMouseLeave = () => setTipVisibility(false);
 
     return (
-
         <div className={`tooltip ${className}`}>
-
             <div className="tooltip__content" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-
                 {children}
-
             </div>
 
             <span ref={toolTipRef} className={`tooltip__tip ${tipVisibility ? 'visible' : ''}`}>
-
                 {tip}
 
                 <i ref={toolTipTriangleRef} className="tooltip__tip__triangle" />
-
             </span>
-
         </div>
-
     );
-
 }
 
 type PropTypes = {
-
-    className?: string,
-    tip: string,
-    children: React.ReactNode
-
+    className?: string;
+    tip: string;
+    children: React.ReactNode;
 };
 
 Tooltip.defaultProps = {
-
     className: ''
-
 };
 
 export { Tooltip };

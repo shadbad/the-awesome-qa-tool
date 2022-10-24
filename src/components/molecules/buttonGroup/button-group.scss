@@ -1,45 +1,45 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 
 .button-group {
-  display: flex;
-  flex-flow: row-reverse;
+    display: flex;
+    flex-flow: row-reverse;
 }
 
 .button-group__button-list {
-  visibility: hidden;
-  clip-path: inset(0 0 0 100%);
-  transition: visibility 0s linear 0.3s, clip-path 0.3s ease-in-out;
-  display: flex;
-  flex-flow: row-reverse nowrap;
+    visibility: hidden;
+    clip-path: inset(0 0 0 100%);
+    transition: visibility 0s linear 0.3s, clip-path 0.3s ease-in-out;
+    display: flex;
+    flex-flow: row-reverse nowrap;
 }
 
 .button-group__button-list__item {
-  box-sizing: border-box;
-  height: 8rem;
-
-  button {
-    width: 100%;
     box-sizing: border-box;
     height: 8rem;
-    width: 8rem;
-    border-right: none;
 
-    span {
-      display: none;
-    }
+    button {
+        width: 100%;
+        box-sizing: border-box;
+        height: 8rem;
+        width: 8rem;
+        border-right: none;
 
-    svg {
-      border: none;
+        span {
+            display: none;
+        }
+
+        svg {
+            border: none;
+        }
     }
-  }
 }
 
 .button-group--expanded {
-  @extend .button-group;
+    @extend .button-group;
 
-  .button-group__button-list {
-    visibility: visible;
-    clip-path: inset(0 0 0 0);
-    transition: visibility 0s linear, clip-path 0.3s ease-in-out;
-  }
+    .button-group__button-list {
+        visibility: visible;
+        clip-path: inset(0 0 0 0);
+        transition: visibility 0s linear, clip-path 0.3s ease-in-out;
+    }
 }

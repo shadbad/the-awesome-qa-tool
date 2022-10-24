@@ -3,11 +3,9 @@ import { QuestionAnswerType } from 'store/types';
 import { FormQA } from './formQA';
 
 describe('FormQA', () => {
-
     let submitResult: QuestionAnswerType | null = null;
 
     const renderFormQA = (questionAnswer?: QuestionAnswerType | null, isEdit = false) => {
-
         const emptyQA: QuestionAnswerType = questionAnswer || {
             id: '123',
             date: new Date(2022, 1, 1).valueOf(),
@@ -16,62 +14,55 @@ describe('FormQA', () => {
         };
 
         const handleSubmit = (qa: QuestionAnswerType) => {
-
             submitResult = qa;
-
         };
 
         const handleCancel = () => 'cancel clicked';
 
-        render(<FormQA variant={isEdit ? 'update' : 'create'} questionAnswer={emptyQA} onCancel={handleCancel} onSubmit={handleSubmit} />);
-
+        render(
+            <FormQA
+                variant={isEdit ? 'update' : 'create'}
+                questionAnswer={emptyQA}
+                onCancel={handleCancel}
+                onSubmit={handleSubmit}
+            />
+        );
     };
 
-    const getFormParts = (): { [key: string]: HTMLElement } => (
-
-        {
-            question: screen.getByLabelText('Question'),
-            answer: screen.getByLabelText('Answer'),
-            deferred: screen.getByLabelText('Deferred save'),
-            submit: screen.getByText(/(Create|Update) Question/)
-        }
-
-    );
+    const getFormParts = (): { [key: string]: HTMLElement } => ({
+        question: screen.getByLabelText('Question'),
+        answer: screen.getByLabelText('Answer'),
+        deferred: screen.getByLabelText('Deferred save'),
+        submit: screen.getByText(/(Create|Update) Question/)
+    });
 
     beforeEach(() => {
-
         submitResult = null;
-
     });
 
     it('Renders the correct title and button in create mode', () => {
-
         renderFormQA();
 
         const title = screen.queryByText('Create a new question');
 
         const submit = screen.queryByText('Create Question');
 
-        expect(title).not.toBeNull();
-        expect(submit).not.toBeNull();
-
+        expect(title).toBeInTheDocument();
+        expect(submit).toBeInTheDocument();
     });
 
     it('Renders the correct title and button in update mode', () => {
-
         renderFormQA(null, true);
 
         const title = screen.queryByText('Update the selected question');
 
         const submit = screen.queryByText('Update Question');
 
-        expect(title).not.toBeNull();
-        expect(submit).not.toBeNull();
-
+        expect(title).toBeInTheDocument();
+        expect(submit).toBeInTheDocument();
     });
 
     it('Validates all fields for emptiness', () => {
-
         renderFormQA();
 
         const formParts = getFormParts();
@@ -81,11 +72,9 @@ describe('FormQA', () => {
         const error = screen.getAllByText('This field is required.');
 
         expect(error).toHaveLength(2);
-
     });
 
     it('Creates a valid new QA object on submit', () => {
-
         renderFormQA();
 
         const formParts = getFormParts();
@@ -97,13 +86,10 @@ describe('FormQA', () => {
         expect(submitResult).not.toBeNull();
         expect(submitResult?.question).toBe('Test question');
         expect(submitResult?.answer).toBe('Test answer');
-
     });
 
     it('Populates the input fields in update mode', () => {
-
         const testObject = {
-
             id: '123',
             date: new Date(2022, 1, 1).valueOf(),
             question: 'Test question',
@@ -116,11 +102,9 @@ describe('FormQA', () => {
 
         expect(formParts.question).toHaveValue('Test question');
         expect(formParts.answer).toHaveValue('Test answer');
-
     });
 
     it('waits 5s before submitting if the deferred save option is checked', async () => {
-
         jest.useFakeTimers();
         renderFormQA();
         const formParts = getFormParts();
@@ -133,19 +117,16 @@ describe('FormQA', () => {
         expect(submitResult).toBeNull();
 
         act(() => {
-
             jest.advanceTimersByTime(5000);
-
         });
 
-        await waitFor(() => {
-
-            expect(submitResult).not.toBeNull();
-            expect(submitResult?.question).toBe('Test question');
-            expect(submitResult?.answer).toBe('Test answer');
-
-        }, { timeout: 5000 });
-
+        await waitFor(
+            () => {
+                expect(submitResult).not.toBeNull();
+                expect(submitResult?.question).toBe('Test question');
+                expect(submitResult?.answer).toBe('Test answer');
+            },
+            { timeout: 5000 }
+        );
     });
-
 });

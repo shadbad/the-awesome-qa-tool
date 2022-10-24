@@ -1,63 +1,63 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 
 .tooltip {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .tooltip__content {
-  display: inline;
-  float: left;
+    display: inline;
+    float: left;
 }
 
 .tooltip__tip {
-  position: fixed;
-  width: 80rem;
-  z-index: 100;
-  background-color: colors.$charcoal600;
-  padding: 4rem;
-  box-sizing: border-box;
-  border: 0.25rem solid colors.$charcoal500;
-  font-size: 3.5rem;
-  line-height: 1.25em;
-  opacity: 0;
-  visibility: hidden;
-  transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
-  &.visible {
-    transition: visibility 0s linear, opacity 0.3s ease-in-out;
-    opacity: 1;
-    visibility: visible;
-  }
+    position: fixed;
+    width: 80rem;
+    z-index: 100;
+    background-color: colors.$charcoal600;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 0.25rem solid colors.$charcoal500;
+    font-size: 3.5rem;
+    line-height: 1.25em;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 0.3s, opacity 0.3s ease-in-out;
+    &.visible {
+        transition: visibility 0s linear, opacity 0.3s ease-in-out;
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 .tooltip__tip__triangle {
-  width: 3rem;
-  height: 3rem;
-  box-sizing: border-box;
-  border: 0.25rem solid colors.$charcoal500;
-  background-color: colors.$charcoal600;
-  position: fixed;
-  z-index: 101;
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  transform-origin: top left;
+    width: 3rem;
+    height: 3rem;
+    box-sizing: border-box;
+    border: 0.25rem solid colors.$charcoal500;
+    background-color: colors.$charcoal600;
+    position: fixed;
+    z-index: 101;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    transform-origin: top left;
 }
 
 .tooltip--top {
-  @extend .tooltip;
+    @extend .tooltip;
 
-  .tooltip__tip {
-    bottom: auto;
-    top: -2rem;
-    transform: translateY(-100%);
-  }
+    .tooltip__tip {
+        bottom: auto;
+        top: -2rem;
+        transform: translateY(-100%);
+    }
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 
-  100% {
-    opacity: 1;
-  }
+    100% {
+        opacity: 1;
+    }
 }

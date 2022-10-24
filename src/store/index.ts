@@ -6,11 +6,9 @@ const rootReducer = combineReducers({ app, questionAnswer });
 const listenerMiddleware = createListenerMiddleware();
 
 const store = configureStore({
-
     reducer: rootReducer,
 
     middleware: (getDefaultMiddleware) => [listenerMiddleware.middleware, ...getDefaultMiddleware()]
-
 });
 
 listenerMiddleware.startListening(questionAnswerListeners.syncListener);

@@ -4,7 +4,6 @@ import { ListQA } from 'components/molecules';
 import { QuestionAnswerType } from 'store/types';
 
 function Landing() {
-
     const INTRO_ANIMATION_DURATION = 6000;
 
     const qaServices = useQuestionAnswerStore();
@@ -12,54 +11,38 @@ function Landing() {
     const appServices = useAppStore();
 
     const handleItemDeleteClick = (id: string) => {
-
         const qa = qaServices.find(id);
 
         if (qa) appServices.setModal('delete', qa);
-
     };
 
     if (process.env.NODE_ENV === 'test') {
-
         return (
             <Layout animate animationDelay={0}>
-
                 <ListQA
                     items={qaServices.items}
                     onItemDelete={handleItemDeleteClick}
                     onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
                 />
-
             </Layout>
-
         );
-
     }
 
     return (
-
         <Layout animate animationDelay={2500}>
-
             <ShortLived duration={INTRO_ANIMATION_DURATION}>
-
                 <Intro />
-
             </ShortLived>
 
             <DelayRender duration={INTRO_ANIMATION_DURATION}>
-
                 <ListQA
                     items={qaServices.items}
                     onItemDelete={handleItemDeleteClick}
                     onItemEdit={(item: QuestionAnswerType) => appServices.setModal('update', item)}
                 />
-
             </DelayRender>
-
         </Layout>
-
     );
-
 }
 
 export { Landing };

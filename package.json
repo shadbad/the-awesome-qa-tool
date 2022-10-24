@@ -6,7 +6,7 @@
         "@reduxjs/toolkit": "^1.8.5",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
-        "@testing-library/user-event": "^13.5.0",
+        "@testing-library/user-event": "^14.4.3",
         "@types/jest": "^27.5.2",
         "@types/node": "^16.11.64",
         "@types/react": "^18.0.21",
@@ -23,7 +23,19 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "coverage": "npm run test --coverage --watchAll",
+        "lint": "eslint --ignore-path .gitignore .",
+        "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss}\"",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "eslint"
+        ],
+        "*.{ts,tsx,scss,css}": [
+            "prettier --write"
+        ]
     },
     "browserslist": {
         "production": [
@@ -42,11 +54,19 @@
         "@typescript-eslint/parser": "^5.39.0",
         "eslint": "^8.24.0",
         "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.5.0",
         "eslint-import-resolver-typescript": "^3.5.1",
         "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jest-dom": "^4.0.2",
         "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-react": "^7.31.8",
         "eslint-plugin-react-hooks": "^4.6.0",
+        "husky": "^8.0.0",
+        "lint-staged": "^13.0.3",
+        "prettier": "^2.7.1",
+        "prettier-eslint": "^15.0.1",
+        "prettier-eslint-cli": "^7.1.0",
         "sass": "^1.55.0"
     }
 }

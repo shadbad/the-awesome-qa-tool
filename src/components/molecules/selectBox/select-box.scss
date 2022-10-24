@@ -1,105 +1,105 @@
-@use "/src/assets/styles/colors.scss";
-@use "/src/assets/styles/shared.scss";
+@use '/src/assets/styles/colors.scss';
+@use '/src/assets/styles/shared.scss';
 
 .select-box__switch {
-  display: flex;
-  border: 0.25rem solid colors.$charcoal500;
-  background-color: colors.$charcoal700;
-  margin: 0;
-  box-sizing: border-box;
-  padding: 0;
-  width: 100%;
-  height: 8rem;
-  align-items: center;
-  cursor: pointer;
+    display: flex;
+    border: 0.25rem solid colors.$charcoal500;
+    background-color: colors.$charcoal700;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    width: 100%;
+    height: 8rem;
+    align-items: center;
+    cursor: pointer;
 }
 
 .select-box__switch__icon {
-  box-sizing: border-box;
-  width: 8rem;
-  height: 8rem;
-  padding: 1.5rem;
-  transition: background-color 0.3s ease-in-out;
-  path {
-    fill: colors.$charcoal200;
-  }
+    box-sizing: border-box;
+    width: 8rem;
+    height: 8rem;
+    padding: 1.5rem;
+    transition: background-color 0.3s ease-in-out;
+    path {
+        fill: colors.$charcoal200;
+    }
 }
 
 .select-box__switch__title {
-  margin-right: auto;
-  padding: 0 2rem;
-  border-left: 0.25rem solid colors.$charcoal500;
-  height: 8rem;
-  line-height: 8rem;
+    margin-right: auto;
+    padding: 0 2rem;
+    border-left: 0.25rem solid colors.$charcoal500;
+    height: 8rem;
+    line-height: 8rem;
 }
 
 .select-box__switch__chevron {
-  width: 4rem;
-  height: 4rem;
-  margin-right: 2rem;
-  path {
-    fill: colors.$charcoal200;
-  }
+    width: 4rem;
+    height: 4rem;
+    margin-right: 2rem;
+    path {
+        fill: colors.$charcoal200;
+    }
 }
 
 .select-box__switch:hover {
-  .select-box__switch__icon {
-    background-color: colors.$charcoal500;
-  }
+    .select-box__switch__icon {
+        background-color: colors.$charcoal500;
+    }
 }
 
 .select-box__list {
-  display: flex;
-  flex-flow: column nowrap;
-  border: 0.25rem solid colors.$charcoal500;
-  border-top: none;
-  background-color: colors.$charcoal700;
-  max-height: 0;
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 0.3s linear, max-height 0.3s linear;
+    display: flex;
+    flex-flow: column nowrap;
+    border: 0.25rem solid colors.$charcoal500;
+    border-top: none;
+    background-color: colors.$charcoal700;
+    max-height: 0;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.3s linear, max-height 0.3s linear;
 }
 
 .select-box__list__item {
-  margin: 0;
-  display: block;
-  transition: background-color 0.3s ease-in-out;
+    margin: 0;
+    display: block;
+    transition: background-color 0.3s ease-in-out;
 
-  &:hover {
-    background-color: colors.$charcoal600;
-  }
+    &:hover {
+        background-color: colors.$charcoal600;
+    }
 }
 
 .select-box__list__item__button {
-  width: 100%;
-  border: none;
-  display: block;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  height: 10rem;
-  padding-left: 10rem;
-  background-color: transparent;
-  cursor: pointer;
-  position: relative;
+    width: 100%;
+    border: none;
+    display: block;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    height: 10rem;
+    padding-left: 10rem;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
 
-  &.mark {
-    &::before {
-      content: "";
-      width: 2rem;
-      height: 2rem;
-      background-color: colors.$charcoal400;
-      position: absolute;
-      left: 3rem;
-      top: 50%;
-      transform: translateY(-50%);
+    &.mark {
+        &::before {
+            content: '';
+            width: 2rem;
+            height: 2rem;
+            background-color: colors.$charcoal400;
+            position: absolute;
+            left: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
-  }
 }
 
 .select-box--expanded {
-  .select-box__list {
-    max-height: 100vh;
-    clip-path: inset(0 0 0 0);
-  }
+    .select-box__list {
+        max-height: 100vh;
+        clip-path: inset(0 0 0 0);
+    }
 }

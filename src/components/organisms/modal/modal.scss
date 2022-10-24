@@ -1,35 +1,35 @@
-@use "/src/assets/styles/colors.scss";
-@use "/src/assets/styles/shared.scss";
+@use '/src/assets/styles/colors.scss';
+@use '/src/assets/styles/shared.scss';
 
 .modal {
-  position: fixed;
-  z-index: 30;
-  top: 12rem;
-  bottom: 12rem;
-  left: 6rem;
-  right: 6rem;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+    position: fixed;
+    z-index: 30;
+    top: 12rem;
+    bottom: 12rem;
+    left: 6rem;
+    right: 6rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .modal__wrapper__inner-wrapper {
-  width: 100%;
-  max-width: 160rem;
-  background-color: colors.$charcoal700;
-  border: 0.25rem solid colors.$charcoal500;
-  padding: 6rem;
-  box-sizing: border-box;
-  opacity: 0;
-  animation: fadeIn 0.3s ease-in-out 0s forwards;
+    width: 100%;
+    max-width: 160rem;
+    background-color: colors.$charcoal700;
+    border: 0.25rem solid colors.$charcoal500;
+    padding: 6rem;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out 0s forwards;
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 
-  100% {
-    opacity: 1;
-  }
+    100% {
+        opacity: 1;
+    }
 }

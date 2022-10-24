@@ -1,50 +1,50 @@
-@use "/src/assets/styles/colors.scss";
+@use '/src/assets/styles/colors.scss';
 
 .button-icon {
-  border: 0.25rem solid colors.$charcoal500;
-  background-color: colors.$charcoal700;
-  box-sizing: border-box;
-  margin: 0;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  height: 8rem;
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border: 0.25rem solid colors.$charcoal500;
+    background-color: colors.$charcoal700;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 8rem;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .button-icon__icon {
-  width: 8rem;
-  height: 8rem;
-  box-sizing: border-box;
-  padding: 1.5rem;
-  border-right: 0.25rem solid colors.$charcoal500;
-  transition: background-color 0.3s ease-in-out;
+    width: 8rem;
+    height: 8rem;
+    box-sizing: border-box;
+    padding: 1.5rem;
+    border-right: 0.25rem solid colors.$charcoal500;
+    transition: background-color 0.3s ease-in-out;
 
-  path {
-    fill: colors.$charcoal200;
-  }
+    path {
+        fill: colors.$charcoal200;
+    }
 }
 
 .button-icon__text {
-  display: block;
-  line-height: 1em;
-  white-space: nowrap;
-  padding: 0 1.5rem;
+    display: block;
+    line-height: 1em;
+    white-space: nowrap;
+    padding: 0 1.5rem;
 }
 
 .button-icon:hover {
-  .button-icon__icon {
-    background-color: colors.$charcoal500;
-    path {
-      fill: colors.$purple200;
+    .button-icon__icon {
+        background-color: colors.$charcoal500;
+        path {
+            fill: colors.$purple200;
+        }
     }
-  }
 }
 
 .button-icon--tooltip {
-  .button-icon__icon {
-    border-right: none;
-  }
+    .button-icon__icon {
+        border-right: none;
+    }
 }

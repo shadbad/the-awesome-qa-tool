@@ -8,9 +8,7 @@ import { generateId } from 'utilities';
 import './form-qa.scss';
 
 function getInitialState(questionAnswer: QuestionAnswerType | null | undefined) {
-
     return {
-
         questionAnswer: questionAnswer || {
             id: generateId(),
             question: '',
@@ -29,165 +27,119 @@ function getInitialState(questionAnswer: QuestionAnswerType | null | undefined) 
 
         counter: 5
     };
-
 }
 
 function reducer(state: StateType, action: ActionType) {
-
     switch (action.type) {
-
         case 'setQuestion':
             return produce(state, (draft) => {
-
                 draft.questionAnswer.question = action.payload as string;
-
             });
 
         case 'setAnswer':
             return produce(state, (draft) => {
-
                 draft.questionAnswer.answer = action.payload as string;
-
             });
 
         case 'setDeffer':
             return produce(state, (draft) => {
-
                 draft.defferSave = action.payload as boolean;
-
             });
 
         case 'setQuestionValidation':
             return produce(state, (draft) => {
-
                 draft.validationSummary.questionError = action.payload as string;
-
             });
 
         case 'setAnswerValidation':
             return produce(state, (draft) => {
-
                 draft.validationSummary.answerError = action.payload as string;
-
             });
 
         case 'setStartCountDown':
             return produce(state, (draft) => {
-
                 draft.startCountDown = action.payload as boolean;
-
             });
 
         case 'setCounter':
             return produce(state, (draft) => {
-
                 draft.counter = action.payload as number;
-
             });
 
         default:
             throw new Error('unknown command');
-
     }
-
 }
 
 function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: PropTypes) {
-
     const [state, dispatch] = useReducer(reducer, getInitialState(questionAnswer));
 
     useEffect(() => {
-
         let intervalId: NodeJS.Timer;
 
         if (state.startCountDown) {
-
             intervalId = setInterval(() => {
-
                 if (state.counter === 1) {
-
                     onSubmit(state.questionAnswer);
                     clearInterval(intervalId);
-
                 }
 
                 dispatch({ type: 'setCounter', payload: state.counter - 1 });
-
             }, 1000);
-
         }
 
         return () => clearInterval(intervalId);
-
     }, [state.startCountDown, state.counter]);
 
     const validate = (): boolean => {
-
         let result = true;
 
         if (state.questionAnswer.question.trim().length === 0) {
-
             result = false;
             dispatch({ type: 'setQuestionValidation', payload: 'This field is required.' });
-
         } else dispatch({ type: 'setQuestionValidation', payload: '' });
 
         if (state.questionAnswer.answer.trim().length === 0) {
-
             result = false;
             dispatch({ type: 'setAnswerValidation', payload: 'This field is required.' });
-
         } else dispatch({ type: 'setAnswerValidation', payload: '' });
 
         return result;
-
     };
 
     const handleQuestionChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-
         dispatch({ type: 'setQuestion', payload: target.value });
-
     };
 
     const handleAnswerChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => {
-
         dispatch({ type: 'setAnswer', payload: target.value });
-
     };
 
     const handelDefferChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-
         dispatch({ type: 'setDeffer', payload: target.checked });
-
     };
 
     const handleSubmit = () => {
-
         if (onSubmit && validate()) {
-
             if (!state.defferSave) onSubmit(state.questionAnswer);
-
             else dispatch({ type: 'setStartCountDown', payload: true });
-
         }
-
     };
 
-    const tooltip = variant === 'create' ?
-        'Here you can create new questions and their answers.'
-        :
-        'Here you can update the selected question and its answer.';
+    const tooltip =
+        variant === 'create'
+            ? 'Here you can create new questions and their answers.'
+            : 'Here you can update the selected question and its answer.';
 
     return (
-
-        <form className={`form-qa ${className} ${state.startCountDown ? 'form-qa--count-down' : ''}`} data-counter={state.counter}>
-
+        <form
+            className={`form-qa ${className} ${state.startCountDown ? 'form-qa--count-down' : ''}`}
+            data-counter={state.counter}
+        >
             <Tooltip tip={tooltip}>
-
                 <h2 className="form-qa__heading">
                     {variant === 'create' ? 'Create a new question' : 'Update the selected question'}
                 </h2>
-
             </Tooltip>
 
             <TextInput
@@ -216,7 +168,6 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
             />
 
             <div className="form-qa__button-wrapper">
-
                 <ButtonIcon
                     className="form-qa__button-wrapper__submit"
                     iconName="check"
@@ -230,27 +181,20 @@ function FormQA({ className, variant, questionAnswer, onSubmit, onCancel }: Prop
                     text="Cancel"
                     onClick={onCancel}
                 />
-
             </div>
-
         </form>
-
     );
-
 }
 
 type PropTypes = {
-
-    className?: string,
-    variant?: 'create' | 'update',
-    questionAnswer?: QuestionAnswerType | null,
-    onSubmit: (questionAnswer: QuestionAnswerType) => void,
-    onCancel: () => void
-
+    className?: string;
+    variant?: 'create' | 'update';
+    questionAnswer?: QuestionAnswerType | null;
+    onSubmit: (questionAnswer: QuestionAnswerType) => void;
+    onCancel: () => void;
 };
 
 FormQA.defaultProps = {
-
     className: '',
     variant: 'create',
     questionAnswer: {
@@ -259,25 +203,23 @@ FormQA.defaultProps = {
         answer: '',
         date: new Date().valueOf()
     }
-
 };
 
 type ActionType = {
-    type: string,
-    payload: string | boolean | number
-}
+    type: string;
+    payload: string | boolean | number;
+};
 
 type StateType = {
+    questionAnswer: QuestionAnswerType;
 
-    questionAnswer: QuestionAnswerType,
+    validationSummary: { [key: string]: string };
 
-    validationSummary: { [key: string]: string },
+    defferSave: boolean;
 
-    defferSave: boolean,
+    startCountDown: boolean;
 
-    startCountDown: boolean,
-
-    counter: number
-}
+    counter: number;
+};
 
 export { FormQA };
