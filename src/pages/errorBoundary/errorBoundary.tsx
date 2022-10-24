@@ -1,6 +1,5 @@
 /* eslint-disable react/static-property-placement */
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { Layout } from 'components/organisms';
 import './error-boundary.scss';
 
 class ErrorBoundary extends Component<propTypes, stateType> {
