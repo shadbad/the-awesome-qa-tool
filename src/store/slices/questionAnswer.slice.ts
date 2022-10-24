@@ -15,6 +15,23 @@ const fetch = createAsyncThunk('questionAnswer/fetch', () => {
     return localStorageData ? JSON.parse(localStorageData) : [];
 });
 
+const sort = (items: QuestionAnswerType[], property: 'question' | 'date', desc = false) =>
+    items.sort((a, b) => {
+        if (a[property] === b[property]) return 0;
+
+        if (desc) {
+            return a[property] < b[property] ? 1 : -1;
+        }
+
+        return a[property] < b[property] ? -1 : 1;
+    });
+
+const extractSortDetails = (input: string): ['question' | 'date', boolean] => {
+    const sortProperty = input.split(' ')[0].trim() as 'question' | 'date';
+    const desc = input.endsWith(' desc');
+    return [sortProperty, desc];
+};
+
 const initialState: QuestionAnswerStateType = {
     isLoading: false,
     error: '',
@@ -36,13 +53,18 @@ const questionAnswerSlice = createSlice({
 
     reducers: {
         add: (state, action: PrimitiveActionType<QuestionAnswerType>) => {
-            state.items = [...state.items, action.payload];
+            const items = [...state.items, action.payload];
+            const [sortProperty, desc] = extractSortDetails(state.sortOrder);
+
+            state.items = sort(items, sortProperty, desc);
         },
 
         update: (state, action: PrimitiveActionType<QuestionAnswerType>) => {
             const index = state.items.findIndex((x) => x.id === action.payload.id);
+            const items = [...state.items.slice(0, index), action.payload, ...state.items.slice(index + 1)];
+            const [sortProperty, desc] = extractSortDetails(state.sortOrder);
 
-            state.items = [...state.items.slice(0, index), action.payload, ...state.items.slice(index + 1)];
+            state.items = sort(items, sortProperty, desc);
         },
 
         delete: (state, action: PrimitiveActionType<string>) => {
@@ -54,17 +76,10 @@ const questionAnswerSlice = createSlice({
         },
 
         sort: (state, action: PrimitiveActionType<SortOrderType>) => {
-            state.items = [...state.items].sort((a, b) => {
-                const property = action.payload.split(' ')[0].trim() as 'question' | 'date';
+            const property = action.payload.split(' ')[0].trim() as 'question' | 'date';
+            const desc = action.payload.endsWith(' desc');
 
-                if (a[property] === b[property]) return 0;
-
-                if (action.payload.endsWith(' desc')) {
-                    return a[property] < b[property] ? 1 : -1;
-                }
-
-                return a[property] < b[property] ? -1 : 1;
-            });
+            state.items = sort([...state.items], property, desc);
 
             state.sortOrder = action.payload;
         }
